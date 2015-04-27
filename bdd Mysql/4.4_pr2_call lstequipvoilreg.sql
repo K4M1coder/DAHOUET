@@ -1,0 +1,1 @@
+CALL `lstequipvoilreg`('2', 'MILLENIUM')

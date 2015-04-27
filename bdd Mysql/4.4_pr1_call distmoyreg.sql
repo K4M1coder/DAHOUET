@@ -1,0 +1,1 @@
+CALL `distmoyreg`('1');
