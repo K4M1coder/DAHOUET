@@ -1,4 +1,4 @@
-package com.K4M1coder.dahouet.application.control.doa;
+package com.K4M1coder.dahouet.application.doa;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

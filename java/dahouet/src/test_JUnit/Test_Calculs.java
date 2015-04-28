@@ -2,15 +2,23 @@ package test_JUnit;
 
 import static org.junit.Assert.*;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 
+import com.K4M1coder.dahouet.application.methodes.Calculs;
 import com.K4M1coder.dahouet.application.models.Licencie;
-import com.K4M1coder.dahouet.application.models.methodes.Calculs;
 
-public class test_calculPoints {
+public class Test_Calculs {
 
 	@Test
-	public void test() {
+	public void age() {
+		DateTime dt = new DateTime(1973, 12, 11, 12, 12);
+		assertEquals(41, Calculs.calculAge(dt.toDate()));
+
+	}
+
+	@Test
+	public void calculPoints() {
 
 		Licencie calcul = new Licencie(null, null, null, 0, 50, null, 2015);
 
@@ -20,6 +28,6 @@ public class test_calculPoints {
 
 		assertEquals("Problème Licence, MAJ impossible",
 				Calculs.calculPoints(380.5, 2014, calcul2));
-	}
 
+	}
 }
