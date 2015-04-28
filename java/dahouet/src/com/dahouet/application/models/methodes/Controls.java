@@ -1,4 +1,4 @@
-package com.dahouet.application.control;
+package com.dahouet.application.models.methodes;
 
 public class Controls {
 
@@ -55,5 +55,6 @@ public class Controls {
 		}
 		return errorMess;
 	}
+
 
 }

@@ -1,4 +1,4 @@
-package com.dahouet.application.models;
+package com.dahouet.application.models.methodes;
 /*********************************************************************
   Nom du programme  :  Lire.java
   Auteur            :  Lécu Regis 
