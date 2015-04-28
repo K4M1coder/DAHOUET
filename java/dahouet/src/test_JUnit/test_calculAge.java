@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import com.dahouet.application.models.methodes.Calculs;
+import com.K4M1coder.dahouet.application.models.methodes.Calculs;
 
 public class test_calculAge {
 

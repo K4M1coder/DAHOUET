@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.dahouet.application.models.methodes.Controls;
+import com.K4M1coder.dahouet.application.models.methodes.Controls;
 
 public class test_isValidMail {
 

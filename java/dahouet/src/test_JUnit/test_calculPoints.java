@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.dahouet.application.models.Licencie;
-import com.dahouet.application.models.methodes.Calculs;
+import com.K4M1coder.dahouet.application.models.Licencie;
+import com.K4M1coder.dahouet.application.models.methodes.Calculs;
 
 public class test_calculPoints {
 

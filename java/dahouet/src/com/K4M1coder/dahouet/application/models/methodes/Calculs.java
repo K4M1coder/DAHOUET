@@ -1,10 +1,10 @@
-package com.dahouet.application.models.methodes;
+package com.K4M1coder.dahouet.application.models.methodes;
 
 import java.util.Date;
 
 import org.joda.time.Period;
 
-import com.dahouet.application.models.Licencie;
+import com.K4M1coder.dahouet.application.models.Licencie;
 
 public class Calculs {
 
