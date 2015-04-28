@@ -1,4 +1,4 @@
-package com.dahouet.application.models;
+package com.K4M1coder.dahouet.application.models;
 
 public class Proprietaire extends Personne {
 

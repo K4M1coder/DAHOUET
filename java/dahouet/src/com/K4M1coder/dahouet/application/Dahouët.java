@@ -1,4 +1,4 @@
-package com.dahouet.application;
+package com.K4M1coder.dahouet.application;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
