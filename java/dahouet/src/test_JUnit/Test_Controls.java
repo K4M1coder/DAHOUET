@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import com.K4M1coder.dahouet.application.methodes.Calculs;
+import com.K4M1coder.dahouet.application.methodes.Calcul;
 import com.K4M1coder.dahouet.application.methodes.Controls;
 import com.K4M1coder.dahouet.application.models.Licencie;
 

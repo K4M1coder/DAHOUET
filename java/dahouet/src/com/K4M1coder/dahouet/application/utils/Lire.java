@@ -1,4 +1,4 @@
-package com.K4M1coder.dahouet.application.methodes.utils;
+package com.K4M1coder.dahouet.application.utils;
 /*********************************************************************
   Nom du programme  :  Lire.java
   Auteur            :  Lécu Regis 

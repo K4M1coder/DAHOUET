@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class MainUI extends JFrame {
+public class MainFrame extends JFrame {
 
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class MainUI extends JFrame {
 	/**
 	 * Create the main frame.
 	 */
-	public MainUI() {
+	public MainFrame() {
 		setTitle("enregistrement de voilier");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

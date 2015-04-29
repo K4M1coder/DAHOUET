@@ -6,7 +6,7 @@ import org.joda.time.Period;
 
 import com.K4M1coder.dahouet.application.models.Licencie;
 
-public class Calculs {
+public class Calcul {
 
 	// Calcule de l'âge en utilisant le Framework JodaTime
 	public static int calculAge(Date dateNaissance) {
