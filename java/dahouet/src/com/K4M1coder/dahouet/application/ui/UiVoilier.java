@@ -15,6 +15,16 @@ import javax.swing.SwingConstants;
 import javax.swing.JProgressBar;
 import javax.swing.JSplitPane;
 import javax.swing.JComboBox;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JLayeredPane;
+import javax.swing.JDesktopPane;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import java.awt.GridLayout;
 
 public class UiVoilier extends JFrame {
 
@@ -23,6 +33,11 @@ public class UiVoilier extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel fenettrePrincipale;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
 
 	/**
 	 * Create the main frame.
@@ -30,7 +45,7 @@ public class UiVoilier extends JFrame {
 	public UiVoilier() {
 		setTitle("Enregistrement d'un voilier");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 562, 366);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -38,8 +53,14 @@ public class UiVoilier extends JFrame {
 		JMenu mnNouveau = new JMenu("Voilier");
 		menuBar.add(mnNouveau);
 		
-		JMenuItem mntmNouveau = new JMenuItem("nouveau");
+		JMenuItem mntmNouveau = new JMenuItem("Nouveau");
 		mnNouveau.add(mntmNouveau);
+		
+		JMenuItem mntmModifier = new JMenuItem("Modifier");
+		mnNouveau.add(mntmModifier);
+		
+		JMenuItem mntmSupprimer = new JMenuItem("Supprimer");
+		mnNouveau.add(mntmSupprimer);
 		
 		JMenu menu = new JMenu("?");
 		menuBar.add(menu);
@@ -70,6 +91,7 @@ public class UiVoilier extends JFrame {
 		panel.add(progressBar, BorderLayout.EAST);
 		
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setEnabled(false);
 		fenettrePrincipale.add(splitPane, BorderLayout.NORTH);
 		
 		JLabel lblVoiliersListe = DefaultComponentFactory.getInstance().createLabel("Voiliers");
@@ -77,6 +99,106 @@ public class UiVoilier extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		splitPane.setRightComponent(comboBox);
+		
+		JPanel panel_1 = new JPanel();
+		fenettrePrincipale.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new GridLayout(10, 3, 5, 5));
+		
+		JLabel label_6 = DefaultComponentFactory.getInstance().createLabel(" ");
+		panel_1.add(label_6);
+		
+		JLabel label_7 = new JLabel("");
+		panel_1.add(label_7);
+		
+		JLabel label_8 = new JLabel("");
+		panel_1.add(label_8);
+		
+		JLabel lblProprietaire = DefaultComponentFactory.getInstance().createLabel("Proprietaire");
+		lblProprietaire.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblProprietaire);
+		
+		textField_4 = new JTextField();
+		textField_4.setEditable(false);
+		panel_1.add(textField_4);
+		textField_4.setColumns(10);
+		
+		JLabel label_10 = new JLabel("");
+		panel_1.add(label_10);
+		
+		JLabel label_1 = DefaultComponentFactory.getInstance().createLabel(" ");
+		panel_1.add(label_1);
+		
+		JLabel label_12 = new JLabel("");
+		panel_1.add(label_12);
+		
+		JLabel label_13 = new JLabel("");
+		panel_1.add(label_13);
+		
+		JLabel lblClasse = DefaultComponentFactory.getInstance().createLabel("Classe");
+		lblClasse.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblClasse);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		panel_1.add(textField);
+		textField.setColumns(10);
+		
+		JLabel label_15 = new JLabel("");
+		panel_1.add(label_15);
+		
+		JLabel lblSerie = DefaultComponentFactory.getInstance().createLabel("Serie");
+		lblSerie.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblSerie);
+		
+		textField_1 = new JTextField();
+		textField_1.setEditable(false);
+		panel_1.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel label_17 = new JLabel("");
+		panel_1.add(label_17);
+		
+		JLabel lblCoficient = DefaultComponentFactory.getInstance().createLabel("Co\u00E9ficient");
+		lblCoficient.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblCoficient);
+		
+		textField_2 = new JTextField();
+		textField_2.setEditable(false);
+		panel_1.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel label_19 = new JLabel("");
+		panel_1.add(label_19);
+		
+		JLabel lblNom = DefaultComponentFactory.getInstance().createLabel("Nom");
+		lblNom.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblNom);
+		
+		textField_3 = new JTextField();
+		textField_3.setEditable(false);
+		panel_1.add(textField_3);
+		textField_3.setColumns(10);
+		
+		JLabel label_21 = new JLabel("");
+		panel_1.add(label_21);
+		
+		JLabel label_23 = new JLabel("");
+		panel_1.add(label_23);
+		
+		JLabel label_24 = new JLabel("");
+		panel_1.add(label_24);
+		
+		JLabel label_25 = new JLabel("");
+		panel_1.add(label_25);
+		
+		JButton btnNouveau = new JButton("Nouveau");
+		panel_1.add(btnNouveau);
+		
+		JButton btnModifier = new JButton("Modifier");
+		panel_1.add(btnModifier);
+		
+		JButton btnSupprimer = new JButton("Supprimer");
+		panel_1.add(btnSupprimer);
 	}
 
 }
