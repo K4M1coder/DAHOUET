@@ -16,7 +16,7 @@ public class dahouet {
 		// TODO Auto-generated method stub
 
 
-		// //
+		// // set look and feel
 
 		try {
 			UIManager.setLookAndFeel(UIManager
@@ -25,7 +25,7 @@ public class dahouet {
 		}
 		new dahouet();
 
-		// //
+		// // launch console for testing
 
 		Console.menu();
 
