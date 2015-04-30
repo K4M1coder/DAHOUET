@@ -1,4 +1,4 @@
-package com.K4M1coder.dahouet.application.methodes;
+package com.K4M1coder.dahouet.application.methodes.utils;
 
 public class Controls {
 

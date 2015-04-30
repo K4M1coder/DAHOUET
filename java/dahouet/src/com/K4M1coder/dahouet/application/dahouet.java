@@ -4,8 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.UIManager;
 
-import com.K4M1coder.dahouet.application.ui.Console;
-import com.K4M1coder.dahouet.application.ui.MainFrame;
+import com.K4M1coder.dahouet.application.ui.ConsoleMenu;
+import com.K4M1coder.dahouet.application.ui.UiVoilier;
 
 public class dahouet {
 
@@ -27,7 +27,7 @@ public class dahouet {
 
 		// // launch console for testing
 
-		Console.menu();
+		ConsoleMenu.menu();
 
 	}
 
@@ -38,7 +38,7 @@ public class dahouet {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame frame = new MainFrame();
+					UiVoilier frame = new UiVoilier();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

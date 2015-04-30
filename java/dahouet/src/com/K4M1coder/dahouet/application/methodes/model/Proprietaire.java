@@ -1,4 +1,4 @@
-package com.K4M1coder.dahouet.application.models;
+package com.K4M1coder.dahouet.application.methodes.model;
 
 public class Proprietaire extends Personne {
 
@@ -6,8 +6,7 @@ public class Proprietaire extends Personne {
 	private String telephone;
 	private String adresse;
 
-	
-
+	// mise en place du constructeur
 	public Proprietaire(String nom, String mail, String prenom,
 			String telephone, String adresse) {
 		super(nom, mail, prenom);
@@ -33,8 +32,10 @@ public class Proprietaire extends Personne {
 	}
 
 	// mise en place String to String pour retour affichage
+	@Override
 	public String toString() {
-		return "Proprietaire [telephone=" + telephone + ", adresse=" + adresse + "]";
+		return "Proprietaire " + nom + " " + prenom + " :\ntelephone = "
+				+ telephone + "\nadresse = " + adresse + "\nmail = " + mail;
 	}
 
 }

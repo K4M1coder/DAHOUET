@@ -1,5 +1,4 @@
-package com.K4M1coder.dahouet.application.models;
-
+package com.K4M1coder.dahouet.application.methodes.model;
 
 public class Personne {
 
@@ -41,10 +40,10 @@ public class Personne {
 		this.prenom = prenom;
 	}
 
-	// Création de la fonction de contrôle de validité des Emails
-
+	// mise en place String to String pour retour affichage
+	@Override
 	public String toString() {
-		return "Personne [nom=" + nom + ", mail=" + mail + ", prenom=" + prenom
+		return "nom = " + nom + "\nmail = " + mail + "\nprenom = " + prenom
 				+ "]";
 	}
 

@@ -1,19 +1,19 @@
-package com.K4M1coder.dahouet.application.methodes;
+package com.K4M1coder.dahouet.application.methodes.utils;
 
 import java.util.Date;
 
 import org.joda.time.Period;
 
-import com.K4M1coder.dahouet.application.models.Licencie;
+import com.K4M1coder.dahouet.application.methodes.model.Licencie;
 
 public class Calcul {
 
 	// Calcule de l'âge en utilisant le Framework JodaTime
-	public static int calculAge(Date dateNaissance) {
+	public static int calculAge(Date dn) {
 		Date currentDate = new Date();
-		if (dateNaissance.before(currentDate)) {
+		if (dn.before(currentDate)) {
 
-			Period age = new Period(dateNaissance.getTime(),
+			Period age = new Period(dn.getTime(),
 					currentDate.getTime());
 			return age.getYears();
 		} else {

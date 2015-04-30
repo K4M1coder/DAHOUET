@@ -1,6 +1,10 @@
-package com.K4M1coder.dahouet.application.models;
+package com.K4M1coder.dahouet.application.methodes.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.K4M1coder.dahouet.application.methodes.utils.Calcul;
 
 public class Licencie extends Personne {
 
@@ -10,12 +14,7 @@ public class Licencie extends Personne {
 	private Date dateNaissance;
 	private int anneeLicence;
 
-	// Mise en place des constructeurs
-
-	public int getNumeroLicence() {
-		return numeroLicence;
-	}
-
+	// Mise en place du constructeur
 	public Licencie(String nom, String mail, String prenom, int numeroLicence,
 			double pointsFFV, Date dateNaissance, int anneeLicence) {
 		super(nom, mail, prenom);
@@ -27,6 +26,10 @@ public class Licencie extends Personne {
 	}
 
 	// Mise en place des getters/setters
+	public int getNumeroLicence() {
+		return numeroLicence;
+	}
+
 	public void setNumeroLicence(int numeroLicence) {
 		this.numeroLicence = numeroLicence;
 	}
@@ -56,10 +59,14 @@ public class Licencie extends Personne {
 	}
 
 	// mise en place String to String pour retour affichage
+	@Override
 	public String toString() {
-		return "Licencie [numeroLicence=" + numeroLicence + ", pointsFFV="
-				+ pointsFFV + ", dateNaissance=" + dateNaissance
-				+ ", anneeLicence=" + anneeLicence + "]";
-	}
+		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 
+		return "Licencie " + nom + " " + prenom + ":\nnumeroLicence = "
+				+ numeroLicence + "\npointsFFV = " + pointsFFV
+				+ "\ndateNaissance = " + format.format(dateNaissance)
+				+ "\nâge = " + Calcul.calculAge(dateNaissance)
+				+ "\nanneeLicence = " + anneeLicence + "\nmail = " + mail;
+	}
 }
