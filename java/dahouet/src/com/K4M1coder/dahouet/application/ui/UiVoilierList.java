@@ -26,47 +26,47 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 
-public class UiVoilier extends JFrame {
+public class UiVoilierList extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel fenettrePrincipale;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField textField_ClasseVoilier;
+	private JTextField textField_SerieVoilier;
+	private JTextField textField_CoefVoilier;
+	private JTextField textField_ProprietaireVoilier;
+	private JTextField textField_NomVoilier;
 
 	/**
 	 * Create the main frame.
 	 */
-	public UiVoilier() {
-		setTitle("Enregistrement d'un voilier");
+	public UiVoilierList() {
+		setTitle("Voiliers");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 562, 366);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNouveau = new JMenu("Voilier");
-		menuBar.add(mnNouveau);
+		JMenu mnVoilier = new JMenu("Voilier");
+		menuBar.add(mnVoilier);
 		
-		JMenuItem mntmNouveau = new JMenuItem("Nouveau");
-		mnNouveau.add(mntmNouveau);
+		JMenuItem mntmVoilierNouveauVoilier = new JMenuItem("Nouveau");
+		mnVoilier.add(mntmVoilierNouveauVoilier);
 		
-		JMenuItem mntmModifier = new JMenuItem("Modifier");
-		mnNouveau.add(mntmModifier);
+		JMenuItem mntmVoilierModifierVoilier = new JMenuItem("Modifier");
+		mnVoilier.add(mntmVoilierModifierVoilier);
 		
-		JMenuItem mntmSupprimer = new JMenuItem("Supprimer");
-		mnNouveau.add(mntmSupprimer);
+		JMenuItem mntmVoilierSupprimerVoilier = new JMenuItem("Supprimer");
+		mnVoilier.add(mntmVoilierSupprimerVoilier);
 		
-		JMenu menu = new JMenu("?");
-		menuBar.add(menu);
+		JMenu mnAide = new JMenu("?");
+		menuBar.add(mnAide);
 		
-		JMenuItem mntmPropos = new JMenuItem("\u00E0 propos");
-		menu.add(mntmPropos);
+		JMenuItem mntmAideAPropos = new JMenuItem("\u00E0 propos");
+		mnAide.add(mntmAideAPropos);
 		fenettrePrincipale = new JPanel();
 		fenettrePrincipale.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(fenettrePrincipale);
@@ -97,8 +97,8 @@ public class UiVoilier extends JFrame {
 		JLabel lblVoiliersListe = DefaultComponentFactory.getInstance().createLabel("Voiliers");
 		splitPane.setLeftComponent(lblVoiliersListe);
 		
-		JComboBox comboBox = new JComboBox();
-		splitPane.setRightComponent(comboBox);
+		JComboBox comboBoxListeVoiliers = new JComboBox();
+		splitPane.setRightComponent(comboBoxListeVoiliers);
 		
 		JPanel panel_1 = new JPanel();
 		fenettrePrincipale.add(panel_1, BorderLayout.CENTER);
@@ -113,17 +113,26 @@ public class UiVoilier extends JFrame {
 		JLabel label_8 = new JLabel("");
 		panel_1.add(label_8);
 		
-		JLabel lblProprietaire = DefaultComponentFactory.getInstance().createLabel("Proprietaire");
-		lblProprietaire.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblProprietaire);
+		JLabel lblNomVoilier = DefaultComponentFactory.getInstance().createLabel("Nom");
+		lblNomVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblNomVoilier);
 		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		panel_1.add(textField_4);
-		textField_4.setColumns(10);
+		textField_NomVoilier = new JTextField();
+		textField_NomVoilier.setEditable(false);
+		panel_1.add(textField_NomVoilier);
+		textField_NomVoilier.setColumns(10);
 		
-		JLabel label_10 = new JLabel("");
-		panel_1.add(label_10);
+		JLabel label = DefaultComponentFactory.getInstance().createLabel("");
+		panel_1.add(label);
+		
+		JLabel lblProprietaireVoilier = DefaultComponentFactory.getInstance().createLabel("Proprietaire");
+		panel_1.add(lblProprietaireVoilier);
+		lblProprietaireVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		textField_ProprietaireVoilier = new JTextField();
+		textField_ProprietaireVoilier.setEditable(false);
+		panel_1.add(textField_ProprietaireVoilier);
+		textField_ProprietaireVoilier.setColumns(10);
 		
 		JLabel label_1 = DefaultComponentFactory.getInstance().createLabel(" ");
 		panel_1.add(label_1);
@@ -131,62 +140,53 @@ public class UiVoilier extends JFrame {
 		JLabel label_12 = new JLabel("");
 		panel_1.add(label_12);
 		
+		JLabel label_24 = new JLabel("");
+		panel_1.add(label_24);
+		
 		JLabel label_13 = new JLabel("");
 		panel_1.add(label_13);
 		
-		JLabel lblClasse = DefaultComponentFactory.getInstance().createLabel("Classe");
-		lblClasse.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblClasse);
+		JLabel lblClasseVoilier = DefaultComponentFactory.getInstance().createLabel("Classe");
+		lblClasseVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblClasseVoilier);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		panel_1.add(textField);
-		textField.setColumns(10);
+		textField_ClasseVoilier = new JTextField();
+		textField_ClasseVoilier.setEditable(false);
+		panel_1.add(textField_ClasseVoilier);
+		textField_ClasseVoilier.setColumns(10);
 		
 		JLabel label_15 = new JLabel("");
 		panel_1.add(label_15);
 		
-		JLabel lblSerie = DefaultComponentFactory.getInstance().createLabel("Serie");
-		lblSerie.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblSerie);
+		JLabel lblSerieVoilier = DefaultComponentFactory.getInstance().createLabel("Serie");
+		lblSerieVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblSerieVoilier);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
+		textField_SerieVoilier = new JTextField();
+		textField_SerieVoilier.setEditable(false);
+		panel_1.add(textField_SerieVoilier);
+		textField_SerieVoilier.setColumns(10);
 		
 		JLabel label_17 = new JLabel("");
 		panel_1.add(label_17);
 		
-		JLabel lblCoficient = DefaultComponentFactory.getInstance().createLabel("Co\u00E9ficient");
-		lblCoficient.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblCoficient);
+		JLabel lblCoeficientVoilier = DefaultComponentFactory.getInstance().createLabel("Co\u00E9ficient");
+		lblCoeficientVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblCoeficientVoilier);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
+		textField_CoefVoilier = new JTextField();
+		textField_CoefVoilier.setEditable(false);
+		panel_1.add(textField_CoefVoilier);
+		textField_CoefVoilier.setColumns(10);
 		
 		JLabel label_19 = new JLabel("");
 		panel_1.add(label_19);
-		
-		JLabel lblNom = DefaultComponentFactory.getInstance().createLabel("Nom");
-		lblNom.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblNom);
-		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		panel_1.add(textField_3);
-		textField_3.setColumns(10);
 		
 		JLabel label_21 = new JLabel("");
 		panel_1.add(label_21);
 		
 		JLabel label_23 = new JLabel("");
 		panel_1.add(label_23);
-		
-		JLabel label_24 = new JLabel("");
-		panel_1.add(label_24);
 		
 		JLabel label_25 = new JLabel("");
 		panel_1.add(label_25);
