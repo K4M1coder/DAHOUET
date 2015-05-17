@@ -1,29 +1,25 @@
 package com.K4M1coder.dahouet.application.ui;
 
 import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.BoxLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
+
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 import javax.swing.SwingConstants;
 import javax.swing.JProgressBar;
 import javax.swing.JSplitPane;
 import javax.swing.JComboBox;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JLayeredPane;
-import javax.swing.JDesktopPane;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
 import java.awt.GridLayout;
 
 public class UiVoilierList extends JFrame {
@@ -42,6 +38,7 @@ public class UiVoilierList extends JFrame {
 	/**
 	 * Create the main frame.
 	 */
+	@SuppressWarnings("rawtypes")
 	public UiVoilierList() {
 		setTitle("Voiliers");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -13,6 +13,7 @@ import com.K4M1coder.dahouet.application.methodes.utils.Lire;
 
 public class ConsoleMenu {
 
+	@SuppressWarnings("unused")
 	public static void menu() {
 
 		boolean run = false;
