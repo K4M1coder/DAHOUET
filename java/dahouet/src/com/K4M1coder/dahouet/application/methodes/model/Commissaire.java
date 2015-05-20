@@ -6,10 +6,10 @@ public class Commissaire extends Personne {
 	private String comite;
 
 	// Mise en place du constructeur
-	public Commissaire(String nom, String mail, String prenom, String comite) {
-		super(nom, mail, prenom);
-		this.comite=comite;
-
+	public Commissaire(int idPersonne, String nom, String mail, String prenom,
+			String comite) {
+		super(idPersonne, nom, mail, prenom);
+		this.comite = comite;
 	}
 
 	// Mise en place getters/setters

@@ -1,10 +1,11 @@
-package com.K4M1coder.dahouet.application.dao;
+package com.K4M1coder.dahouet.application;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class connectDAO {
+public class Connect {
+
 	static Connection con = null;
 
 	public static Connection cConnect() {
@@ -15,8 +16,7 @@ public class connectDAO {
 
 			// On se connecte via la passerelle jdbc Oracle
 
-			return con = DriverManager.getConnection(url, "dahouet_user",
-					"password");
+			return con = DriverManager.getConnection(url, "dahouet_user", "0321510669");
 		} catch (SQLException sqlE) {
 			System.out.println("Sql Erreur " + sqlE.getMessage());
 			return null;

@@ -3,14 +3,14 @@ package com.K4M1coder.dahouet.application.methodes.model;
 public class Proprietaire extends Personne {
 
 	// Déclaration des variables
-	private String telephone;
-	private String adresse;
+	protected String telephone;
+	protected String adresse;
 
 	// mise en place du constructeur
-	public Proprietaire(String nom, String mail, String prenom,
-			String telephone, String adresse) {
-		super(nom, mail, prenom);
-		this.telephone = telephone;
+	public Proprietaire(int idPersonne, String nom, String mail, String prenom,
+			String string, String adresse) {
+		super(idPersonne, nom, mail, prenom);
+		this.telephone = string;
 		this.adresse = adresse;
 	}
 
@@ -32,10 +32,14 @@ public class Proprietaire extends Personne {
 	}
 
 	// mise en place String to String pour retour affichage
+	public String affiche() {
+		return "Proprietaire " + nom + " " + prenom + " :\n\n-telephone = "
+				+ telephone + "\n-adresse=" + adresse + "\n-mail=" + mail;
+	}
+
 	@Override
 	public String toString() {
-		return "Proprietaire " + nom + " " + prenom + " :\ntelephone = "
-				+ telephone + "\nadresse = " + adresse + "\nmail = " + mail;
+		return idPersonne + " : " + nom + " " + prenom;
 	}
 
 }

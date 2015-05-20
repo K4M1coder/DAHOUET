@@ -32,7 +32,7 @@ public class ConsoleMenu {
 			case 1:
 
 				Proprietaire prop = null;
-				prop = new Proprietaire("Thedrez", "cedric@thedrez.fr",
+				prop = new Proprietaire(1,"Thedrez", "cedric@thedrez.fr",
 						"Cedric", "0607080901", "29, rue des madières");
 				System.out.println(Affiche.afficheProprietaire(prop));
 				run = true;
@@ -41,7 +41,7 @@ public class ConsoleMenu {
 			case 2:
 				
 				Personne pers = null;
-				pers = new Personne("Thedrez", "cedric@thedrez.fr", "Cedric");
+				pers = new Personne(1, "Thedrez", "cedric@thedrez.fr", "Cedric");
 				System.out.println(Affiche.affichePersonne(pers));
 				run = true;
 				break;
@@ -54,7 +54,7 @@ public class ConsoleMenu {
 				Licencie lic = null;
 
 				try {
-					lic = new Licencie("Thedrez", "Cedric@Thedrez.fr","Cedric", 1234, 249.9, date.parse(birthday), 2015);
+					lic = new Licencie(1, "Thedrez", "Cedric@Thedrez.fr","Cedric", 1234, 249.9, date.parse(birthday), 2015);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
@@ -70,7 +70,7 @@ public class ConsoleMenu {
 
 			case 4:
 				
-				Commissaire com = new Commissaire("Thedrez","cedric@thedrez.fr", "Cedric", "Geeks Masters");
+				Commissaire com = new Commissaire(1, "Thedrez","cedric@thedrez.fr", "Cedric", "Geeks Masters");
 				System.out.println(Affiche.afficheCommissaire(com));
 				run = true;
 				break;

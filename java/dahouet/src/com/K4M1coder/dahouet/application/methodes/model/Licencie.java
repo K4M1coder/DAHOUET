@@ -15,14 +15,14 @@ public class Licencie extends Personne {
 	private int anneeLicence;
 
 	// Mise en place du constructeur
-	public Licencie(String nom, String mail, String prenom, int numeroLicence,
-			double pointsFFV, Date dateNaissance, int anneeLicence) {
-		super(nom, mail, prenom);
+	public Licencie(int idPersonne, String nom, String mail, String prenom,
+			int numeroLicence, double pointsFFV, Date dateNaissance,
+			int anneeLicence) {
+		super(idPersonne, nom, mail, prenom);
 		this.numeroLicence = numeroLicence;
 		this.pointsFFV = pointsFFV;
 		this.dateNaissance = dateNaissance;
 		this.anneeLicence = anneeLicence;
-
 	}
 
 	// Mise en place des getters/setters
