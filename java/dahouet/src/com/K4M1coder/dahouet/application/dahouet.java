@@ -4,8 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.UIManager;
 
+import com.K4M1coder.dahouet.application.control.Control;
 import com.K4M1coder.dahouet.application.ui.ConsoleMenu;
-import control.Control;
 
 public class dahouet {
 

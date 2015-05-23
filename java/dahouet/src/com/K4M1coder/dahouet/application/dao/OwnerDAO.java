@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import com.K4M1coder.dahouet.application.methodes.model.Club;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 
-public class proprioDAO {
+public class OwnerDAO {
 	private static Connection c;
 
 	public static ArrayList<Proprietaire> getProprio() {

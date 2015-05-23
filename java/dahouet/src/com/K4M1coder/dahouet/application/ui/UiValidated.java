@@ -2,7 +2,7 @@ package com.K4M1coder.dahouet.application.ui;
 
 import javax.swing.JFrame;
 
-public class UiConfirmation extends JFrame{
+public class UiValidated extends JFrame{
 
 	/**
 	 * 

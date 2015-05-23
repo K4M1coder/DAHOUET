@@ -11,6 +11,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 
+import com.K4M1coder.dahouet.application.control.Control;
+import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import javax.swing.SwingConstants;
@@ -21,6 +23,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class UiVoilierList extends JFrame {
 
@@ -34,15 +39,17 @@ public class UiVoilierList extends JFrame {
 	private JTextField textField_CoefVoilier;
 	private JTextField textField_ProprietaireVoilier;
 	private JTextField textField_NomVoilier;
+	private JComboBox<Proprietaire> comboBoxListeVoiliers;
+	private JButton btnNouveau;
 
 	/**
 	 * Create the main frame.
 	 */
-	@SuppressWarnings("rawtypes")
 	public UiVoilierList() {
 		setTitle("Voiliers");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 562, 366);
+		Control control = new Control();
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -51,6 +58,12 @@ public class UiVoilierList extends JFrame {
 		menuBar.add(mnVoilier);
 		
 		JMenuItem mntmVoilierNouveauVoilier = new JMenuItem("Nouveau");
+		mntmVoilierNouveauVoilier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.initVoilierNew();
+				dispose();
+			}
+		});
 		mnVoilier.add(mntmVoilierNouveauVoilier);
 		
 		JMenuItem mntmVoilierModifierVoilier = new JMenuItem("Modifier");
@@ -94,8 +107,14 @@ public class UiVoilierList extends JFrame {
 		JLabel lblVoiliersListe = DefaultComponentFactory.getInstance().createLabel("Voiliers");
 		splitPane.setLeftComponent(lblVoiliersListe);
 		
-		JComboBox comboBoxListeVoiliers = new JComboBox();
+		comboBoxListeVoiliers = new JComboBox<Proprietaire>();
 		splitPane.setRightComponent(comboBoxListeVoiliers);
+		comboBoxListeVoiliers.removeAllItems();
+		ArrayList<Proprietaire> listProprio = control.proprioInit();
+
+		for (Proprietaire proprio : listProprio) {
+			comboBoxListeVoiliers.addItem(proprio);
+		}
 		
 		JPanel panel_1 = new JPanel();
 		fenettrePrincipale.add(panel_1, BorderLayout.CENTER);
@@ -188,7 +207,11 @@ public class UiVoilierList extends JFrame {
 		JLabel label_25 = new JLabel("");
 		panel_1.add(label_25);
 		
-		JButton btnNouveau = new JButton("Nouveau");
+		btnNouveau = new JButton("Nouveau");
+		btnNouveau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		panel_1.add(btnNouveau);
 		
 		JButton btnModifier = new JButton("Modifier");

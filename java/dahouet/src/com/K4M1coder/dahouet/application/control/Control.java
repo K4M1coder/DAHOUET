@@ -1,15 +1,15 @@
-package control;
+package com.K4M1coder.dahouet.application.control;
 
 import java.util.ArrayList;
 
-import com.K4M1coder.dahouet.application.dao.proprioDAO;
-import com.K4M1coder.dahouet.application.dao.voilierDAO;
+import com.K4M1coder.dahouet.application.dao.OwnerDAO;
+import com.K4M1coder.dahouet.application.dao.ShipDAO;
 import com.K4M1coder.dahouet.application.methodes.model.Classe;
 import com.K4M1coder.dahouet.application.methodes.model.Club;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 import com.K4M1coder.dahouet.application.methodes.model.Serie;
 import com.K4M1coder.dahouet.application.methodes.model.Voilier;
-import com.K4M1coder.dahouet.application.ui.UiConfirmation;
+import com.K4M1coder.dahouet.application.ui.UiValidated;
 import com.K4M1coder.dahouet.application.ui.UiOwnerNew;
 import com.K4M1coder.dahouet.application.ui.UiVoilierNew;
 import com.K4M1coder.dahouet.application.ui.UiVoilierList;
@@ -45,7 +45,7 @@ public class Control {
 
 	public void initConfirm() {
 		try {
-			UiConfirmation frame4 = new UiConfirmation();
+			UiValidated frame4 = new UiValidated();
 			frame4.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,37 +54,37 @@ public class Control {
 
 	public ArrayList<Proprietaire> proprioInit() {
 		ArrayList<Proprietaire> listOwner = new ArrayList<Proprietaire>();
-		listOwner = proprioDAO.getProprio();
+		listOwner = OwnerDAO.getProprio();
 		return listOwner;
 	}
 
 	public ArrayList<Serie> serieInit() {
 		ArrayList<Serie> listSerie = new ArrayList<Serie>();
-		listSerie = voilierDAO.getSerie();
+		listSerie = ShipDAO.getSerie();
 		return listSerie;
 	}
 
 	public ArrayList<Classe> classeInit(Serie serie) {
 		ArrayList<Classe> listClasse = new ArrayList<Classe>();
-		listClasse = voilierDAO.getClasse(serie);
+		listClasse = ShipDAO.getClasse(serie);
 		return listClasse;
 	}
 
 	public ArrayList<Club> clubInit() {
 		ArrayList<Club> listClub = new ArrayList<Club>();
-		listClub = proprioDAO.getClub();
+		listClub = OwnerDAO.getClub();
 		return listClub;
 	}
 
 	public void createProprio(Proprietaire proprio, Club club) {
 
-		proprioDAO.newProprio(proprio, club);
+		OwnerDAO.newProprio(proprio, club);
 	}
 
 	public void createVoilier(Voilier voilier, Classe classe,
 			Proprietaire proprio) {
 
-		voilierDAO.newVoilier(voilier, classe, proprio);
+		ShipDAO.newVoilier(voilier, classe, proprio);
 
 	}
 }

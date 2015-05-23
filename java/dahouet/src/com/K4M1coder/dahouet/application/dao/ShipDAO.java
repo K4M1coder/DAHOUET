@@ -12,7 +12,7 @@ import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 import com.K4M1coder.dahouet.application.methodes.model.Serie;
 import com.K4M1coder.dahouet.application.methodes.model.Voilier;
 
-public class voilierDAO {
+public class ShipDAO {
 	private static Connection c;
 
 	public static ArrayList<Serie> getSerie() {
