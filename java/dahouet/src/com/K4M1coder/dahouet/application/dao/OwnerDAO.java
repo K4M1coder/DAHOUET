@@ -23,23 +23,21 @@ public class OwnerDAO {
 
 		try {
 			stm = c.createStatement();
-
-			String sql = "select * from personne inner join proprietaire on personne.ID_PERSONNE=proprietaire.NUM_PROPR";
-			ResultSet rs = stm.executeQuery(sql);
-
-			while (rs.next()) {
-				int id = rs.getInt("ID_PERSONNE");
-				String nom = new String(rs.getString("NOM_PERSONNE"));
-				String prenom = new String(rs.getString("PRENOM_PERS"));
-				String mail = new String(rs.getString("MAIL"));
-				String tel = rs.getString("TEL_PROPR");
-				String adresse = rs.getString("ADRESSE_PROPR");
+			String sql = "select * from personne inner join proprietaire on personne.ID_PERS=proprietaire.ID_PERS";
+			ResultSet rs_owner = stm.executeQuery(sql);
+			while (rs_owner.next()) {
+				int id = rs_owner.getInt("ID_PERS");
+				String nom = new String(rs_owner.getString("NOM"));
+				String prenom = new String(rs_owner.getString("PRENOM"));
+				String mail = new String(rs_owner.getString("MAIL"));
+				String tel = rs_owner.getString("TELEPHONE");
+				String adresse = rs_owner.getString("ADDRESSE");
 				Proprietaire proprio = new Proprietaire(id, nom, mail, prenom,
 						tel, adresse);
 
 				proprioList.add(proprio);
 			}
-			rs.close();
+			rs_owner.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

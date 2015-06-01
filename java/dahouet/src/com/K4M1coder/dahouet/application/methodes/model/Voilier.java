@@ -2,22 +2,37 @@ package com.K4M1coder.dahouet.application.methodes.model;
 
 public class Voilier {
 
-	protected String nom;
+	protected int idvoilier;
+	protected int owner;
 	protected double coef;
+	protected String classe;
+	protected String name;
+	protected int num;
 
-	public Voilier(String nom, double coef) {
+	public Voilier(int idvoilier, int owner, double coef, String classe, String name, int num) {
 		super();
-		this.nom = nom;
+		this.idvoilier = idvoilier;
+		this.owner = owner;
 		this.coef = coef;
-
+		this.classe = classe;
+		this.name = name;
+		this.num = num;
 	}
 
-	public String getNom() {
-		return nom;
+	public void setIdvoilier(int idvoilier) {
+		this.idvoilier = idvoilier;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public int getIdvoilier() {
+		return idvoilier;
+	}
+
+	public int getOwner() {
+		return owner;
+	}
+
+	public void setOwner(int owner) {
+		this.owner = owner;
 	}
 
 	public double getCoef() {
@@ -27,4 +42,35 @@ public class Voilier {
 	public void setCoef(double coef) {
 		this.coef = coef;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getClasse() {
+		return classe;
+	}
+
+	public void setClasse(String classe) {
+		this.classe = classe;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	@Override
+	public String toString() {
+		return  name + ", classe " + classe + ", voile N°" + num;
+	}
+
+	
 }

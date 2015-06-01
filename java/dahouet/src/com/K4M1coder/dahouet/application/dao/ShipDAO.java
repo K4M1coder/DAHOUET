@@ -15,6 +15,34 @@ import com.K4M1coder.dahouet.application.methodes.model.Voilier;
 public class ShipDAO {
 	private static Connection c;
 
+	public static ArrayList<Voilier> getVoiliers() {
+		c = connectDAO.cConnect();
+
+		ArrayList<Voilier> voilierList = new ArrayList<>();
+		Statement stm;
+
+		try {
+			stm = c.createStatement();
+			String sql = "select * from voilier";
+			ResultSet rs_voilierList = stm.executeQuery(sql);
+			while (rs_voilierList.next()) {
+				int idVoilier = rs_voilierList.getInt("ID_VOILIER");
+				int idPropVoilier = rs_voilierList.getInt("ID_PROPR");
+				double coefVoilier = rs_voilierList.getDouble("COEFF");
+				String classeVoilier = new String (rs_voilierList.getString("CLASSE"));
+				String nomVoilier = new String (rs_voilierList.getString("NOM_VOILIER"));
+				int nuVoile = rs_voilierList.getInt("NUM_VOILE");
+				Voilier voilier = new Voilier(idVoilier, idPropVoilier, coefVoilier, classeVoilier, nomVoilier, nuVoile);
+				voilierList.add(voilier);
+			}
+			rs_voilierList.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return voilierList;
+
+	}
+
 	public static ArrayList<Serie> getSerie() {
 
 		c = connectDAO.cConnect();
@@ -30,15 +58,13 @@ public class ShipDAO {
 			ResultSet rs = stm.executeQuery(sql);
 
 			while (rs.next()) {
-				String nom = new String(rs.getString("NOM_SERIE"));
-				int id = rs.getInt("NUM_SERIE");
-				Serie serie = new Serie(nom, id);
+				String nom = new String(rs.getString("SERIE"));
+				Serie serie = new Serie(nom);
 				serieList.add(serie);
 			}
 			rs.close();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -46,7 +72,7 @@ public class ShipDAO {
 
 	}
 
-	public static ArrayList<Classe> getClasse(Serie serie) {
+	public static ArrayList<Classe> getClasse() {
 		c = connectDAO.cConnect();
 		ArrayList<Classe> classeList = new ArrayList<>();
 		// test avec select
@@ -55,21 +81,18 @@ public class ShipDAO {
 		try {
 			stm = c.createStatement();
 
-			String sql = "select * from classe INNER join serie on serie.NUM_SERIE = classe.NUM_SERIE where serie.NUM_SERIE ='"
-					+ serie.getIdSerie() + "'";
+			String sql = "select * from classe";
 			ResultSet rs = stm.executeQuery(sql);
 
 			while (rs.next()) {
-				String nomclasse = new String(rs.getString("NOM_CLASSE"));
-				int idClasse = rs.getInt("NUM_CLASSE");
-				Classe classe = new Classe(serie.getNomSerie(),
-						serie.getIdSerie(), nomclasse, idClasse);
+				String nomClasse = new String(rs.getString("CLASSE"));
+				String serieClasse = new String(rs.getString("SERIE"));
+				Classe classe = new Classe(serieClasse, nomClasse);
 
 				classeList.add(classe);
 			}
 			rs.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -84,9 +107,9 @@ public class ShipDAO {
 		PreparedStatement stm;
 		try {
 			stm = c.prepareStatement("insert into voilier(NUM_CLASSE,NUM_PROPR,NOM_VOILE,COEFF) VALUES(?,?,?,?)");
-			stm.setInt(1, classe.getIdClasse());
+			stm.setString(1, classe.getNomClasse());
 			stm.setInt(2, proprio.getIdPersonne());
-			stm.setString(3, voilier.getNom());
+			stm.setString(3, voilier.getName());
 			stm.setDouble(4, voilier.getCoef());
 			stm.executeUpdate();
 			stm.close();

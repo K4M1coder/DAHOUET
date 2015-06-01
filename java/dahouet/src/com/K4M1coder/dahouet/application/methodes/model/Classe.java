@@ -1,14 +1,14 @@
 package com.K4M1coder.dahouet.application.methodes.model;
 
-public class Classe extends Serie {
+public class Classe {
 
 	protected String nomClasse;
-	protected int idClasse;
+	protected String serieClasse;
 
-	public Classe(String nomSerie, int idSerie, String nomClasse, int idClasse) {
-		super(nomSerie, idSerie);
+	public Classe(String serieClasse, String nomClasse) {
+		this.serieClasse = serieClasse;
 		this.nomClasse = nomClasse;
-		this.idClasse = idClasse;
+
 	}
 
 	public String getNomClasse() {
@@ -19,17 +19,16 @@ public class Classe extends Serie {
 		this.nomClasse = nomClasse;
 	}
 
-	public int getIdClasse() {
-		return idClasse;
+	public String getSerieClasse() {
+		return serieClasse;
 	}
 
-	public void setIdClasse(int idClasse) {
-		this.idClasse = idClasse;
+	public void setSerieClasse(String serieClasse) {
+		this.serieClasse = serieClasse;
 	}
 
 	@Override
 	public String toString() {
-		return idClasse + " : " + nomClasse;
+		return serieClasse + " : " + nomClasse;
 	}
-
 }

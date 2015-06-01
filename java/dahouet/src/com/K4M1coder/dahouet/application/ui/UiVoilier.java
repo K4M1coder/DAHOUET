@@ -12,7 +12,10 @@ import javax.swing.JToolBar;
 import javax.swing.JLabel;
 
 import com.K4M1coder.dahouet.application.control.Control;
+import com.K4M1coder.dahouet.application.methodes.model.Classe;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
+import com.K4M1coder.dahouet.application.methodes.model.Serie;
+import com.K4M1coder.dahouet.application.methodes.model.Voilier;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import javax.swing.SwingConstants;
@@ -25,9 +28,14 @@ import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.awt.Component;
 
-public class UiVoilierList extends JFrame {
+import javax.swing.Box;
+
+public class UiVoilier extends JFrame {
 
 	/**
 	 * 
@@ -39,17 +47,23 @@ public class UiVoilierList extends JFrame {
 	private JTextField textField_CoefVoilier;
 	private JTextField textField_ProprietaireVoilier;
 	private JTextField textField_NomVoilier;
-	private JComboBox<Proprietaire> comboBoxListeVoiliers;
+	private JTextField textfield_numVoileVoilier;
+	private JComboBox<Voilier> comboBoxListeVoiliers;
+	private JComboBox<Proprietaire> comboBoxListeProprietaires;
+	private JComboBox<Classe> comboBoxListeClasses;
+	private JComboBox<Serie> comboBoxListeSeries;
 	private JButton btnNouveau;
-
+	private JButton btnModifier;
+	private JButton btnSupprimer;
+	private Control control = new Control();
 	/**
 	 * Create the main frame.
 	 */
-	public UiVoilierList() {
+	public UiVoilier() {
 		setTitle("Voiliers");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 562, 366);
-		Control control = new Control();
+
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -101,24 +115,31 @@ public class UiVoilierList extends JFrame {
 		panel.add(progressBar, BorderLayout.EAST);
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setEnabled(false);
+		splitPane.setVisible(true);
 		fenettrePrincipale.add(splitPane, BorderLayout.NORTH);
 		
 		JLabel lblVoiliersListe = DefaultComponentFactory.getInstance().createLabel("Voiliers");
 		splitPane.setLeftComponent(lblVoiliersListe);
 		
-		comboBoxListeVoiliers = new JComboBox<Proprietaire>();
+		comboBoxListeVoiliers = new JComboBox<Voilier>();
 		splitPane.setRightComponent(comboBoxListeVoiliers);
 		comboBoxListeVoiliers.removeAllItems();
-		ArrayList<Proprietaire> listProprio = control.proprioInit();
+		ArrayList<Voilier> listVoiliers = control.voilierInit();
 
-		for (Proprietaire proprio : listProprio) {
-			comboBoxListeVoiliers.addItem(proprio);
+		for (Voilier voilier : listVoiliers) {
+			comboBoxListeVoiliers.addItem(voilier);
 		}
+		comboBoxListeVoiliers.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				textFieldLoad();
+			}
+		});
 		
 		JPanel panel_1 = new JPanel();
 		fenettrePrincipale.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(10, 3, 5, 5));
+		panel_1.setLayout(new GridLayout(11, 3, 5, 5));
 		
 		JLabel label_6 = DefaultComponentFactory.getInstance().createLabel(" ");
 		panel_1.add(label_6);
@@ -198,8 +219,14 @@ public class UiVoilierList extends JFrame {
 		JLabel label_19 = new JLabel("");
 		panel_1.add(label_19);
 		
-		JLabel label_21 = new JLabel("");
-		panel_1.add(label_21);
+		JLabel lblNumVoileVoilier = DefaultComponentFactory.getInstance().createLabel("voile N°");
+		lblNumVoileVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblNumVoileVoilier);
+		
+		textfield_numVoileVoilier = new JTextField();
+		textfield_numVoileVoilier.setEditable(false);
+		panel_1.add(textfield_numVoileVoilier);
+		textfield_numVoileVoilier.setColumns(10);
 		
 		JLabel label_23 = new JLabel("");
 		panel_1.add(label_23);
@@ -212,13 +239,40 @@ public class UiVoilierList extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
+		JLabel label_2 = new JLabel("");
+		panel_1.add(label_2);
+		
+		JLabel label_3 = new JLabel("");
+		panel_1.add(label_3);
 		panel_1.add(btnNouveau);
 		
-		JButton btnModifier = new JButton("Modifier");
+		btnModifier = new JButton("Modifier");
 		panel_1.add(btnModifier);
 		
-		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer = new JButton("Supprimer");
 		panel_1.add(btnSupprimer);
-	}
+		
+		textFieldLoad();
 
+	}
+	private void textFieldLoad(){
+		Voilier voilier = (Voilier) comboBoxListeVoiliers.getSelectedItem();
+		textField_NomVoilier.setText(voilier.getName());
+		ArrayList<Proprietaire> listProprietaires = control.proprioInit();
+		Proprietaire proprio = (Proprietaire) listProprietaires.get(voilier.getOwner()-1);
+		textField_ProprietaireVoilier.setText(proprio.toString());
+		textField_ClasseVoilier.setText(voilier.getClasse());
+		ArrayList<Classe> classeVoilier = control.classeInit();
+		String serie = null;
+		for (Classe classe : classeVoilier) {
+			String serieClasse = classe.getSerieClasse();
+			if (classe.getNomClasse().equals(voilier.getClasse())){
+				serie = serieClasse;
+			}
+		}
+		textField_SerieVoilier.setText(serie);
+		textField_CoefVoilier.setText(Double.toString(voilier.getCoef()));
+		textfield_numVoileVoilier.setText(Integer.toString(voilier.getNum()));
+	}
 }

@@ -2,7 +2,7 @@ package com.K4M1coder.dahouet.application.methodes.model;
 
 public class Proprietaire extends Personne {
 
-	// Déclaration des variables
+	// Dï¿½claration des variables
 	protected String telephone;
 	protected String adresse;
 
@@ -39,7 +39,7 @@ public class Proprietaire extends Personne {
 
 	@Override
 	public String toString() {
-		return idPersonne + " : " + nom + " " + prenom;
+		return prenom + " " + nom;
 	}
 
 }

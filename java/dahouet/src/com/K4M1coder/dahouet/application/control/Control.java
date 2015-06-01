@@ -12,13 +12,13 @@ import com.K4M1coder.dahouet.application.methodes.model.Voilier;
 import com.K4M1coder.dahouet.application.ui.UiValidated;
 import com.K4M1coder.dahouet.application.ui.UiOwnerNew;
 import com.K4M1coder.dahouet.application.ui.UiVoilierNew;
-import com.K4M1coder.dahouet.application.ui.UiVoilierList;
+import com.K4M1coder.dahouet.application.ui.UiVoilier;
 
 public class Control {
 
 	public void initVoilierList() {
 		try {
-			UiVoilierList frame1 = new UiVoilierList();
+			UiVoilier frame1 = new UiVoilier();
 			frame1.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,6 +57,13 @@ public class Control {
 		listOwner = OwnerDAO.getProprio();
 		return listOwner;
 	}
+	
+	public ArrayList<Voilier> voilierInit() {
+		ArrayList<Voilier> listVoiliers = new ArrayList<Voilier>();
+		listVoiliers = ShipDAO.getVoiliers();
+		return listVoiliers;
+	}
+
 
 	public ArrayList<Serie> serieInit() {
 		ArrayList<Serie> listSerie = new ArrayList<Serie>();
@@ -64,9 +71,9 @@ public class Control {
 		return listSerie;
 	}
 
-	public ArrayList<Classe> classeInit(Serie serie) {
+	public ArrayList<Classe> classeInit() {
 		ArrayList<Classe> listClasse = new ArrayList<Classe>();
-		listClasse = ShipDAO.getClasse(serie);
+		listClasse = ShipDAO.getClasse();
 		return listClasse;
 	}
 
