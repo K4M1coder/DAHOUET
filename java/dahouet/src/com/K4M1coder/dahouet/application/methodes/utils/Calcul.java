@@ -8,7 +8,7 @@ import com.K4M1coder.dahouet.application.methodes.model.Licencie;
 
 public class Calcul {
 
-	// Calcule de l'âge en utilisant le Framework JodaTime
+	// Calcule de l'Ã ge en utilisant le Framework JodaTime
 	public static int calculAge(Date dn) {
 		Date currentDate = new Date();
 		if (dn.before(currentDate)) {
@@ -26,13 +26,13 @@ public class Calcul {
 			Licencie calcul) {
 
 		String result = null;
-		int yearLicence = (currentAnnee - calcul.getAnneeLicence());
+		int yearLicence = (currentAnnee - calcul.getDateLicence());
 		if (yearLicence == 0) {
-			double FFV = calcul.getPointsFFV();
+			double FFV = calcul.getPtsFFV();
 			double r = new Double(FFV + pts);
 			result = String.valueOf(r);
 		} else
-			result = "Problème Licence, MAJ impossible";
+			result = "ProblÃ¨me Licence, MAJ impossible";
 
 		return result;
 

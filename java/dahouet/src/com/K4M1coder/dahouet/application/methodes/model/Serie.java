@@ -4,6 +4,9 @@ public class Serie {
 
 	protected String nomSerie;
 
+	/**
+	 * @param nomSerie
+	 */
 	public Serie(String nomSerie) {
 		super();
 		this.nomSerie = nomSerie;

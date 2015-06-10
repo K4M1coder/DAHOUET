@@ -9,6 +9,14 @@ public class Voilier {
 	protected String name;
 	protected int num;
 
+	/**
+	 * @param idvoilier
+	 * @param owner
+	 * @param coef
+	 * @param classe
+	 * @param name
+	 * @param num
+	 */
 	public Voilier(int idvoilier, int owner, double coef, String classe, String name, int num) {
 		super();
 		this.idvoilier = idvoilier;
@@ -69,7 +77,7 @@ public class Voilier {
 
 	@Override
 	public String toString() {
-		return  name + ", classe " + classe + ", voile N°" + num;
+		return  idvoilier+" : "+ name + ", classe " + classe + ", voile N°" + num;
 	}
 
 	

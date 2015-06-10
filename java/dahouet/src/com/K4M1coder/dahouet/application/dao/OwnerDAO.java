@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.K4M1coder.dahouet.application.methodes.model.Club;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
@@ -26,18 +27,23 @@ public class OwnerDAO {
 			String sql = "select * from personne inner join proprietaire on personne.ID_PERS=proprietaire.ID_PERS";
 			ResultSet rs_owner = stm.executeQuery(sql);
 			while (rs_owner.next()) {
-				int id = rs_owner.getInt("ID_PERS");
+				int idPersonne = rs_owner.getInt("ID_PERS");
+				int idPers = idPersonne;
+				int idProprio = rs_owner.getInt("ID_PROPR");
+				int idClub = rs_owner.getInt("ID_CLUB");
+				Date dateN = rs_owner.getDate("DATE_N");
 				String nom = new String(rs_owner.getString("NOM"));
 				String prenom = new String(rs_owner.getString("PRENOM"));
 				String mail = new String(rs_owner.getString("MAIL"));
-				String tel = rs_owner.getString("TELEPHONE");
-				String adresse = rs_owner.getString("ADDRESSE");
-				Proprietaire proprio = new Proprietaire(id, nom, mail, prenom,
-						tel, adresse);
+				long telephone = rs_owner.getLong("TELEPHONE");
+				String addresse = rs_owner.getString("ADDRESSE");
+				Proprietaire proprio = new Proprietaire(idPersonne, nom, prenom, addresse, telephone, dateN, mail, idProprio, idClub, idPers);
 
 				proprioList.add(proprio);
 			}
 			rs_owner.close();
+			stm.close();
+			c.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -64,12 +70,17 @@ public class OwnerDAO {
 
 			while (rs.next()) {
 
-				int id = rs.getInt("NUM_CLUB");
+				int id = rs.getInt("ID_CLUB");
 				String nom = new String(rs.getString("NOM_CLUB"));
-				Club club = new Club(id, nom);
+				String addresse = (rs.getString("ADRESSE_CLUB"));
+				long telephone = rs.getLong("TEL_CLUB");
+				int presid = rs.getInt("ID_PRESIDENT");
+				Club club = new Club(id, nom, addresse, telephone, presid);
 				clubList.add(club);
-			}
+			}		
 			rs.close();
+			stm.close();
+			c.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -100,11 +111,13 @@ public class OwnerDAO {
 			stm = c.prepareStatement("insert into proprietaire(NUM_PROPR,NUM_CLUB,ADRESSE_PROPR,TEL_PROPR) VALUES(?,?,?,?)");
 			stm.setInt(1, numProprio);
 			stm.setInt(2, club.getIdClub());
-			stm.setString(3, proprio.getAdresse());
-			stm.setString(4, proprio.getTelephone());
+			stm.setString(3, proprio.getAddresse());
+			stm.setLong(4, proprio.getTelephone());
 			stm.executeUpdate();
 
 			stm.close();
+			stm.close();
+			c.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -129,6 +142,8 @@ public class OwnerDAO {
 			numproprio = rs.getInt("ID_PERSONNE");
 
 			rs.close();
+			stm.close();
+			c.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

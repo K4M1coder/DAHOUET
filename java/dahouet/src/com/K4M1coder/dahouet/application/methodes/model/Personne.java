@@ -1,37 +1,55 @@
 package com.K4M1coder.dahouet.application.methodes.model;
 
+import java.util.Date;
+
 public class Personne {
 
-	// Déclaration des variables
+	// Dï¿½claration des variables
 	protected int idPersonne;
 	protected String nom;
-	protected String mail;
 	protected String prenom;
+	protected String addresse;
+	protected long telephone;
+	protected Date dateN;
+	protected String mail;
 
 	// Mise en place du constructeur
-	public Personne(int idPersonne, String nom, String mail, String prenom) {
+	/**
+	 * @param idPersonne
+	 * @param nom
+	 * @param prenom
+	 * @param addresse
+	 * @param telephone
+	 * @param dateN
+	 * @param mail
+	 */
+	public Personne(int idPersonne, String nom, String prenom, String addresse, long telephone, Date dateN, String mail) {
 		super();
 		this.idPersonne = idPersonne;
 		this.nom = nom;
-		this.mail = mail;
 		this.prenom = prenom;
+		this.addresse = addresse;
+		this.telephone = telephone;
+		this.dateN = dateN;
+		this.mail = mail;
 	}
 
 	// Mise en place des getters/setters
+
+	public int getIdPersonne() {
+		return idPersonne;
+	}
+
+	public void setIdPersonne(int idPersonne) {
+		this.idPersonne = idPersonne;
+	}
+
 	public String getNom() {
 		return nom;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
 	}
 
 	public String getPrenom() {
@@ -42,19 +60,42 @@ public class Personne {
 		this.prenom = prenom;
 	}
 
-	public int getIdPersonne() {
-		return idPersonne;
+	public String getAddresse() {
+		return addresse;
 	}
 
-	public void setIdPersonne(int idPersonne) {
-		this.idPersonne = idPersonne;
+	public void setAddresse(String addresse) {
+		this.addresse = addresse;
+	}
+
+	public long getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(long telephone) {
+		this.telephone = telephone;
+	}
+
+	public Date getDateN() {
+		return dateN;
+	}
+
+	public void setDateN(Date dateN) {
+		this.dateN = dateN;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	// mise en place String to String pour retour affichage
 	@Override
 	public String toString() {
-		return "nom = " + nom + "\nmail = " + mail + "\nprenom = " + prenom
-				+ "]";
+		return "nom = " + nom + "\nmail = " + mail + "\nprenom = " + prenom + "]";
 	}
 
 }

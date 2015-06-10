@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  27/04/2015 16:09:43                      */
+/* Date de création :  24/05/2015 00:52:17                      */
 /*==============================================================*/
 
 
@@ -123,9 +123,9 @@ create table PARTICIPATION
    ID_VOILIER           int not null,
    ID_REGATE            int not null,
    H_DEP                time not null,
-   STATUT_DEP           char(3) not null DEFAULT 'NA',
+   STATUT_DEP           char(3) not null,
    H_ARRIV              time not null,
-   STATUT_ARRIV         char(3) not null DEFAULT 'NA',
+   STATUT_ARRIV         char(3) not null,
    ID_SKIPER            int not null,
    PLACE                int,
    primary key (ID_PART)
@@ -148,9 +148,11 @@ create table PERSONNE
 (
    ID_PERS              int not null auto_increment,
    NOM                  varchar(20) not null,
+   PRENOM               varchar(20) not null,
    ADDRESSE             varchar(50) not null,
    TELEPHONE            bigint not null,
    DATE_N               date not null,
+   MAIL                 varchar(64),
    primary key (ID_PERS)
 );
 

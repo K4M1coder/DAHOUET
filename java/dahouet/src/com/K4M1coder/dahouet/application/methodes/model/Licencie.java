@@ -8,54 +8,79 @@ import com.K4M1coder.dahouet.application.methodes.utils.Calcul;
 
 public class Licencie extends Personne {
 
-	// DÈclaration des variables
-	private int numeroLicence;
-	private double pointsFFV;
-	private Date dateNaissance;
-	private int anneeLicence;
+	// D√©claration des variables
+	private int idMarin;
+	private int idPers;
+	private long numLicence;
+	private int dateLicence;
+	private int ptsFFV;
 
 	// Mise en place du constructeur
-	public Licencie(int idPersonne, String nom, String mail, String prenom,
-			int numeroLicence, double pointsFFV, Date dateNaissance,
-			int anneeLicence) {
-		super(idPersonne, nom, mail, prenom);
-		this.numeroLicence = numeroLicence;
-		this.pointsFFV = pointsFFV;
-		this.dateNaissance = dateNaissance;
-		this.anneeLicence = anneeLicence;
+	/**
+	 * @param idPersonne
+	 * @param nom
+	 * @param prenom
+	 * @param addresse
+	 * @param telephone
+	 * @param dateN
+	 * @param mail
+	 * @param idMarin
+	 * @param idPers
+	 * @param numLicence
+	 * @param dateLicence
+	 * @param ptsFFV
+	 */
+	public Licencie(int idPersonne, String nom, String prenom, String addresse, long telephone, Date dateN,
+			String mail, int idMarin, int idPers, long numLicence, int dateLicence, int ptsFFV) {
+		super(idPersonne, nom, prenom, addresse, telephone, dateN, mail);
+		this.idMarin = idMarin;
+		this.idPers = idPers;
+		this.numLicence = numLicence;
+		this.dateLicence = dateLicence;
+		this.ptsFFV = ptsFFV;
 	}
 
 	// Mise en place des getters/setters
-	public int getNumeroLicence() {
-		return numeroLicence;
+
+
+	public int getIdMarin() {
+		return idMarin;
 	}
 
-	public void setNumeroLicence(int numeroLicence) {
-		this.numeroLicence = numeroLicence;
+	public void setIdMarin(int idMarin) {
+		this.idMarin = idMarin;
 	}
 
-	public double getPointsFFV() {
-		return pointsFFV;
+	public int getIdPers() {
+		return idPers;
 	}
 
-	public void setPointsFFV(double pointsFFV) {
-		this.pointsFFV = pointsFFV;
+	public void setIdPers(int idPers) {
+		this.idPers = idPers;
 	}
 
-	public Date getDateNaissance() {
-		return dateNaissance;
+	public long getNumLicence() {
+		return numLicence;
 	}
 
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
+	public void setNumLicence(long numLicence) {
+		this.numLicence = numLicence;
 	}
 
-	public int getAnneeLicence() {
-		return anneeLicence;
+	public int getDateLicence() {
+		return dateLicence;
 	}
 
-	public void setAnneeLicence(int anneeLicence) {
-		this.anneeLicence = anneeLicence;
+	public void setDateLicence(int dateLicence) {
+		this.dateLicence = dateLicence;
+	}
+
+	public int getPtsFFV() {
+		return ptsFFV;
+	}
+
+	public void setPtsFFV(int ptsFFV) {
+		this.ptsFFV = ptsFFV;
 	}
 
 	// mise en place String to String pour retour affichage
@@ -64,9 +89,9 @@ public class Licencie extends Personne {
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 
 		return "Licencie " + nom + " " + prenom + ":\nnumeroLicence = "
-				+ numeroLicence + "\npointsFFV = " + pointsFFV
-				+ "\ndateNaissance = " + format.format(dateNaissance)
-				+ "\n‚ge = " + Calcul.calculAge(dateNaissance)
-				+ "\nanneeLicence = " + anneeLicence + "\nmail = " + mail;
+				+ numLicence + "\npointsFFV = " + ptsFFV
+				+ "\ndateNaissance = " + format.format(dateN)
+				+ "\n√†ge = " + Calcul.calculAge(dateN)
+				+ "\nanneeLicence = " + dateLicence + "\nmail = " + mail;
 	}
 }

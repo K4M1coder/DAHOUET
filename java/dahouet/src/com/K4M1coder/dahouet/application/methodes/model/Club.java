@@ -5,10 +5,17 @@ public class Club {
 	protected int idClub;
 	protected String nomClub;
 	protected String adrClub;
-	protected int telClub;
+	protected long telClub;
 	protected int presidentClub;
 
-	public Club(int idClub, String nomClub, String adrClub, int telClub,
+	/**
+	 * @param idClub
+	 * @param nomClub
+	 * @param adrClub
+	 * @param telClub
+	 * @param presidentClub
+	 */
+	public Club(int idClub, String nomClub, String adrClub, long telClub,
 			int presidentClub) {
 		super();
 		this.idClub = idClub;
@@ -42,11 +49,11 @@ public class Club {
 		this.adrClub = adrClub;
 	}
 
-	public int getTelClub() {
+	public long getTelClub() {
 		return telClub;
 	}
 
-	public void setTelClub(int telClub) {
+	public void setTelClub(long telClub) {
 		this.telClub = telClub;
 	}
 

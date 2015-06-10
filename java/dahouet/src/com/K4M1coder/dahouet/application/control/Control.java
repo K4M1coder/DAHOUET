@@ -11,24 +11,18 @@ import com.K4M1coder.dahouet.application.methodes.model.Serie;
 import com.K4M1coder.dahouet.application.methodes.model.Voilier;
 import com.K4M1coder.dahouet.application.ui.UiValidated;
 import com.K4M1coder.dahouet.application.ui.UiOwnerNew;
-import com.K4M1coder.dahouet.application.ui.UiVoilierNew;
 import com.K4M1coder.dahouet.application.ui.UiVoilier;
 
 public class Control {
 
+//	 public UiVoilier frameShips;
+//	 public UiOwnerNew frameOwners;
+//	 public UiValidated frameValidation;
+	
 	public void initVoilierList() {
 		try {
-			UiVoilier frame1 = new UiVoilier();
-			frame1.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void initVoilierNew() {
-		try {
-			UiVoilierNew frame2 = new UiVoilierNew();
-			frame2.setVisible(true);
+			UiVoilier frameShips = new UiVoilier();
+			frameShips.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,8 +30,8 @@ public class Control {
 
 	public void initOwnerNew() {
 		try {
-			UiOwnerNew frame3 = new UiOwnerNew();
-			frame3.setVisible(true);
+			UiOwnerNew frameOwners = new UiOwnerNew();
+			frameOwners.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,8 +39,8 @@ public class Control {
 
 	public void initConfirm() {
 		try {
-			UiValidated frame4 = new UiValidated();
-			frame4.setVisible(true);
+			UiValidated frameValidation = new UiValidated();
+			frameValidation.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -88,10 +82,9 @@ public class Control {
 		OwnerDAO.newProprio(proprio, club);
 	}
 
-	public void createVoilier(Voilier voilier, Classe classe,
-			Proprietaire proprio) {
+	public void createVoilier(Voilier voilier, Proprietaire proprio) {
 
-		ShipDAO.newVoilier(voilier, classe, proprio);
+		ShipDAO.newVoilier(voilier, proprio);
 
 	}
 }

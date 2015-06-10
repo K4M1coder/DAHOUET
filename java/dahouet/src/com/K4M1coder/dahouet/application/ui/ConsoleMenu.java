@@ -13,7 +13,7 @@ import com.K4M1coder.dahouet.application.methodes.utils.Lire;
 
 public class ConsoleMenu {
 
-	@SuppressWarnings("unused")
+
 	public static void menu() {
 
 		boolean run = false;
@@ -32,8 +32,8 @@ public class ConsoleMenu {
 			case 1:
 
 				Proprietaire prop = null;
-				prop = new Proprietaire(1,"Thedrez", "cedric@thedrez.fr",
-						"Cedric", "0607080901", "29, rue des madières");
+//				prop = new Proprietaire(1,"Thedrez", "cedric@thedrez.fr",
+//						"Cedric", "0607080901", "29, rue des madiÃ¨res");
 				System.out.println(Affiche.afficheProprietaire(prop));
 				run = true;
 				break;
@@ -41,7 +41,7 @@ public class ConsoleMenu {
 			case 2:
 				
 				Personne pers = null;
-				pers = new Personne(1, "Thedrez", "cedric@thedrez.fr", "Cedric");
+//				pers = new Personne(1, "Thedrez", "cedric@thedrez.fr", "Cedric");
 				System.out.println(Affiche.affichePersonne(pers));
 				run = true;
 				break;
@@ -54,7 +54,7 @@ public class ConsoleMenu {
 				Licencie lic = null;
 
 				try {
-					lic = new Licencie(1, "Thedrez", "Cedric@Thedrez.fr","Cedric", 1234, 249.9, date.parse(birthday), 2015);
+					lic = new Licencie(1, "Thedrez", "Cedric", "rue franc", 33601020304L, date.parse(birthday), "Cedric@Thedrez.fr", 1, 1, 1234, 2015, 249);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
@@ -69,9 +69,18 @@ public class ConsoleMenu {
 				break;
 
 			case 4:
+				SimpleDateFormat date2 = new SimpleDateFormat("yyyy/MM/dd");
+				String birthday2 = "1980/06/24";
 				
-				Commissaire com = new Commissaire(1, "Thedrez","cedric@thedrez.fr", "Cedric", "Geeks Masters");
-				System.out.println(Affiche.afficheCommissaire(com));
+				Commissaire com;
+				try {
+					com = new Commissaire(1, "Thedrez", "Cedric", "rue AG", 33601020304L, date2.parse(birthday2), "cedric@thedrez.fr", 1, 1, "Geeks Masters");
+					System.out.println(Affiche.afficheCommissaire(com));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				run = true;
 				break;
 				

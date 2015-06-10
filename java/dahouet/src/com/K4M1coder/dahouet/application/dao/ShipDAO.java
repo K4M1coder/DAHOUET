@@ -36,6 +36,8 @@ public class ShipDAO {
 				voilierList.add(voilier);
 			}
 			rs_voilierList.close();
+			stm.close();
+			c.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +65,8 @@ public class ShipDAO {
 				serieList.add(serie);
 			}
 			rs.close();
+			stm.close();
+			c.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,6 +96,8 @@ public class ShipDAO {
 				classeList.add(classe);
 			}
 			rs.close();
+			stm.close();
+			c.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -99,20 +105,21 @@ public class ShipDAO {
 		return classeList;
 	}
 
-	public static void newVoilier(Voilier voilier, Classe classe,
-			Proprietaire proprio) {
+	public static void newVoilier(Voilier voilier, Proprietaire proprio) {
 
 		Connection c = connectDAO.cConnect();
 
 		PreparedStatement stm;
 		try {
-			stm = c.prepareStatement("insert into voilier(NUM_CLASSE,NUM_PROPR,NOM_VOILE,COEFF) VALUES(?,?,?,?)");
-			stm.setString(1, classe.getNomClasse());
-			stm.setInt(2, proprio.getIdPersonne());
-			stm.setString(3, voilier.getName());
-			stm.setDouble(4, voilier.getCoef());
+			stm = c.prepareStatement("insert into voilier(ID_PROPR,COEFF,CLASSE,NOM_VOILIER,NUM_VOILE) VALUES(?,?,?,?,?)");
+			stm.setInt(1, proprio.getIdProprio());
+			stm.setDouble(2, voilier.getCoef());
+			stm.setString(3, voilier.getClasse());
+			stm.setString(4, voilier.getName());
+			stm.setInt(5, voilier.getNum());
 			stm.executeUpdate();
 			stm.close();
+			c.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
