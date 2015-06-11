@@ -18,7 +18,6 @@ public class ConsoleMenu {
 
 		boolean run = false;
 		int mainAct;
-		String aff = null;
 		System.out.print("\nconsole de test pour dahouet\n");
 		do {
 			do {

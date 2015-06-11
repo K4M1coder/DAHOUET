@@ -93,9 +93,13 @@ public class Personne {
 	}
 
 	// mise en place String to String pour retour affichage
+	public String affiche(){
+		return "nom = " + nom + "\nmail = " + mail + "\nprenom = " + prenom;
+	}
+	
 	@Override
 	public String toString() {
-		return "nom = " + nom + "\nmail = " + mail + "\nprenom = " + prenom + "]";
+		return nom + " " + prenom;
 	}
 
 }

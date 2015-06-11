@@ -19,6 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -26,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.K4M1coder.dahouet.application.control.Control;
 import com.K4M1coder.dahouet.application.methodes.model.Club;
+import com.K4M1coder.dahouet.application.methodes.model.Personne;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
@@ -46,6 +48,11 @@ public class UiOwnerNew extends JFrame {
 	private JTextField textFieldDateNaissance;
 	private JTextField textFieldMail;
 	private JComboBox<Club> comboBoxListClubs;
+	private JComboBox<Personne> comboBoxPersList;
+	private Boolean refreshingListPers = false;
+	private Personne personne;
+	@SuppressWarnings("unused")
+	private int selectedPers;
 
 	/**
 	 * Create the main frame.
@@ -56,15 +63,21 @@ public class UiOwnerNew extends JFrame {
 		// setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 562, 366);
 
-		addWindowListener(new WindowAdapter()
-        {
-            @Override
-            public void windowClosing(WindowEvent e)  // ici je surchage le defaultcloseoperation pour appeller une fonction de fermeture. plus tard il faudra uttiliser un cardlayout au lieu de plusieurs jframe
-            {
-                closeOwnerUI();
-            }
-        });
-		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) // ici je surchage le
+														// defaultcloseoperation
+														// pour appeller une
+														// fonction de
+														// fermeture. plus tard
+														// il faudra uttiliser
+														// un cardlayout au lieu
+														// de plusieurs JFrame
+			{
+				closeOwnerUI();
+			}
+		});
+
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -119,92 +132,92 @@ public class UiOwnerNew extends JFrame {
 		JProgressBar progressBar = new JProgressBar();
 		panel.add(progressBar, BorderLayout.EAST);
 
-		JPanel panel_1 = new JPanel();
-		fenettrePrincipale.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(11, 3, 5, 5));
+		JPanel panelMain = new JPanel();
+		fenettrePrincipale.add(panelMain, BorderLayout.CENTER);
+		panelMain.setLayout(new GridLayout(11, 3, 5, 5));
 
 		JLabel label_32 = new JLabel("");
 		label_32.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(label_32);
+		panelMain.add(label_32);
 
 		JLabel label_31 = new JLabel("");
-		panel_1.add(label_31);
+		panelMain.add(label_31);
 
 		JLabel label_30 = new JLabel("");
-		panel_1.add(label_30);
+		panelMain.add(label_30);
 
 		JLabel lblNom = new JLabel("Nom");
 		lblNom.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblNom);
+		panelMain.add(lblNom);
 
 		textFieldNom = new JTextField();
-		panel_1.add(textFieldNom);
+		panelMain.add(textFieldNom);
 		textFieldNom.setColumns(10);
 
 		JLabel label_27 = new JLabel("");
-		panel_1.add(label_27);
+		panelMain.add(label_27);
 
 		JLabel lblPrnom = new JLabel("Prénom");
 		lblPrnom.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblPrnom);
+		panelMain.add(lblPrnom);
 
 		textFieldPrenom = new JTextField();
-		panel_1.add(textFieldPrenom);
+		panelMain.add(textFieldPrenom);
 		textFieldPrenom.setColumns(10);
 
 		JLabel label_24 = new JLabel("");
-		panel_1.add(label_24);
+		panelMain.add(label_24);
 
 		JLabel lblAddresse = new JLabel("Addresse");
 		lblAddresse.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblAddresse);
+		panelMain.add(lblAddresse);
 
 		textFieldAdresse = new JTextField();
-		panel_1.add(textFieldAdresse);
+		panelMain.add(textFieldAdresse);
 		textFieldAdresse.setColumns(10);
 
 		JLabel label_21 = new JLabel("");
-		panel_1.add(label_21);
+		panelMain.add(label_21);
 
 		JLabel lblTlphone = new JLabel("Téléphone");
 		lblTlphone.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblTlphone);
+		panelMain.add(lblTlphone);
 
 		textFieldPhone = new JTextField();
-		panel_1.add(textFieldPhone);
+		panelMain.add(textFieldPhone);
 		textFieldPhone.setColumns(10);
 
 		JLabel label_18 = new JLabel("");
-		panel_1.add(label_18);
+		panelMain.add(label_18);
 
 		JLabel lblDateNaissance = new JLabel("Date naissance");
 		lblDateNaissance.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblDateNaissance);
+		panelMain.add(lblDateNaissance);
 
 		textFieldDateNaissance = new JTextField();
-		panel_1.add(textFieldDateNaissance);
+		panelMain.add(textFieldDateNaissance);
 		textFieldDateNaissance.setColumns(10);
 
 		JLabel label_15 = new JLabel("");
-		panel_1.add(label_15);
+		panelMain.add(label_15);
 
 		JLabel lblMail = new JLabel("Mail");
 		lblMail.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblMail);
+		panelMain.add(lblMail);
 
 		textFieldMail = new JTextField();
-		panel_1.add(textFieldMail);
+		panelMain.add(textFieldMail);
 		textFieldMail.setColumns(10);
 
 		JLabel label_12 = new JLabel("");
-		panel_1.add(label_12);
+		panelMain.add(label_12);
 
 		JLabel lblClub = new JLabel("Club");
 		lblClub.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblClub);
+		panelMain.add(lblClub);
 
 		comboBoxListClubs = new JComboBox<Club>();
-		panel_1.add(comboBoxListClubs);
+		panelMain.add(comboBoxListClubs);
 		comboBoxListClubs.removeAllItems();
 		ArrayList<Club> listeClubs = control.clubInit();
 		for (Club club : listeClubs) {
@@ -214,26 +227,26 @@ public class UiOwnerNew extends JFrame {
 		;
 
 		JLabel label_9 = new JLabel("");
-		panel_1.add(label_9);
+		panelMain.add(label_9);
 
 		JLabel label_8 = new JLabel("");
 		label_8.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(label_8);
+		panelMain.add(label_8);
 
 		JLabel label_7 = new JLabel("");
-		panel_1.add(label_7);
+		panelMain.add(label_7);
 
 		JLabel label_6 = new JLabel("");
-		panel_1.add(label_6);
+		panelMain.add(label_6);
 
 		JButton btnEnregistrer = new JButton("Enregistrer");
-		panel_1.add(btnEnregistrer);
+		panelMain.add(btnEnregistrer);
 
 		JLabel label_4 = new JLabel("");
-		panel_1.add(label_4);
+		panelMain.add(label_4);
 
 		JButton btnAnnuler = new JButton("Annuler");
-		panel_1.add(btnAnnuler);
+		panelMain.add(btnAnnuler);
 		btnAnnuler.addActionListener(new ActionListener() {
 
 			@Override
@@ -245,50 +258,109 @@ public class UiOwnerNew extends JFrame {
 
 		JLabel label_2 = new JLabel("");
 		label_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(label_2);
+		panelMain.add(label_2);
 
 		JLabel label_1 = new JLabel("");
-		panel_1.add(label_1);
+		panelMain.add(label_1);
 
 		JLabel label = new JLabel("");
-		panel_1.add(label);
+		panelMain.add(label);
 
+		JSplitPane splitPanePersonnes = new JSplitPane();
+		splitPanePersonnes.setResizeWeight(1);
+		fenettrePrincipale.add(splitPanePersonnes, BorderLayout.NORTH);
+
+		JSplitPane splitPanePersEdit = new JSplitPane();
+		splitPanePersEdit.setResizeWeight(.5d);
+		splitPanePersonnes.setRightComponent(splitPanePersEdit);
+
+		JButton btnModifier = new JButton("Modifier");
+		splitPanePersEdit.setLeftComponent(btnModifier);
+
+		JButton btnNouveau = new JButton("Nouveau");
+		splitPanePersEdit.setRightComponent(btnNouveau);
+
+		JSplitPane splitPanePersList = new JSplitPane();
+		splitPanePersonnes.setLeftComponent(splitPanePersList);
+
+		JLabel lblPersonne = new JLabel("Personne");
+		splitPanePersList.setLeftComponent(lblPersonne);
+
+		comboBoxPersList = new JComboBox<Personne>();
+		splitPanePersList.setRightComponent(comboBoxPersList);
+		comboBoxPersList.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (refreshingListPers == false) {
+					persLoadUI();
+				}
+
+			}
+		});
+
+		refreshingListPers = true;
+		refreshListPers();
+
+	}
+
+	private void refreshListPers() {
+		comboBoxPersList.removeAllItems();
+		ArrayList<Personne> listPers = control.persInit();
+
+		for (Personne pers : listPers) {
+			comboBoxPersList.addItem(pers);
+		}
+		refreshingListPers = false;
+	}
+
+	private void persLoadUI() {
+		personne = (Personne) comboBoxPersList.getSelectedItem();
+		selectedPers = personne.getIdPersonne();
+
+		textFieldNom.setText(personne.getNom());
+		textFieldPrenom.setText(personne.getPrenom());
+		textFieldAdresse.setText(personne.getAddresse());
+		textFieldPhone.setText(Long.toString(personne.getTelephone()));
+		SimpleDateFormat dateN = new SimpleDateFormat("yyyy/MM/dd");
+		textFieldDateNaissance.setText(dateN.format(personne.getDateN()));
+		textFieldMail.setText(personne.getMail());
 	}
 
 	private void ownerNewSetUI() {
 
-		int idPersonne = 0, idPers= idPersonne;
-		String nom=textFieldNom.getText();
-		String prenom=textFieldPrenom.getText();
-		String addresse=textFieldAdresse.getText();
-		Long phone=Long.parseLong(textFieldPhone.getText());
+		int idPersonne = 0, idPers = idPersonne;
+		String nom = textFieldNom.getText();
+		String prenom = textFieldPrenom.getText();
+		String addresse = textFieldAdresse.getText();
+		Long phone = Long.parseLong(textFieldPhone.getText());
 		SimpleDateFormat dateN = new SimpleDateFormat("yyyy/MM/dd");
 		String birthday = textFieldDateNaissance.getText();
-		String mail="mail.fr";		
+		String mail = "mail.fr";
 		Club club = (Club) comboBoxListClubs.getSelectedItem();
-		int idClub=club.getIdClub();
-		int idProprio=0;
-		
+		int idClub = club.getIdClub();
+		int idProprio = 0;
+
 		@SuppressWarnings("unused")
 		Proprietaire proprio;
 		try {
-			proprio = new Proprietaire(idPersonne, nom,	prenom,	addresse, phone, dateN.parse(birthday),	mail, idProprio, idClub, idPers);
+			proprio = new Proprietaire(idPersonne, nom, prenom, addresse, phone, dateN.parse(birthday), mail,
+					idProprio, idClub, idPers);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		control.initVoilierList();
+
+		control.initUIVoilier();
 		dispose();
 	}
 
 	private void ownerModSetUI() {
 
 	}
-	
-	private void closeOwnerUI(){
-		control.initVoilierList();
+
+	private void closeOwnerUI() {
+		control.initUIVoilier();
 		dispose();
 	}
 }

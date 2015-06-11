@@ -12,6 +12,7 @@ import com.K4M1coder.dahouet.application.methodes.model.Club;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 
 public class OwnerDAO {
+
 	private static Connection c;
 
 	public static ArrayList<Proprietaire> getProprio() {
@@ -37,7 +38,8 @@ public class OwnerDAO {
 				String mail = new String(rs_owner.getString("MAIL"));
 				long telephone = rs_owner.getLong("TELEPHONE");
 				String addresse = rs_owner.getString("ADDRESSE");
-				Proprietaire proprio = new Proprietaire(idPersonne, nom, prenom, addresse, telephone, dateN, mail, idProprio, idClub, idPers);
+				Proprietaire proprio = new Proprietaire(idPersonne, nom, prenom, addresse, telephone, dateN, mail,
+						idProprio, idClub, idPers);
 
 				proprioList.add(proprio);
 			}
@@ -77,7 +79,7 @@ public class OwnerDAO {
 				int presid = rs.getInt("ID_PRESIDENT");
 				Club club = new Club(id, nom, addresse, telephone, presid);
 				clubList.add(club);
-			}		
+			}
 			rs.close();
 			stm.close();
 			c.close();
@@ -97,8 +99,7 @@ public class OwnerDAO {
 		int numProprio = 0;
 		PreparedStatement stm;
 		try {
-			stm = c.prepareStatement(
-					"insert into personne(NOM_PERSONNE,PRENOM_PERS,MAIL) VALUES(?,?,?)",
+			stm = c.prepareStatement("insert into personne(NOM_PERSONNE,PRENOM_PERS,MAIL) VALUES(?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			stm.setString(1, proprio.getNom());
 			stm.setString(2, proprio.getPrenom());
@@ -135,8 +136,7 @@ public class OwnerDAO {
 		try {
 			stm = c.createStatement();
 
-			String sql = "select ID_PERSONNE from personne where NOM_PERSONNE ='"
-					+ nomProprio + "'";
+			String sql = "select ID_PERSONNE from personne where NOM_PERSONNE ='" + nomProprio + "'";
 			ResultSet rs = stm.executeQuery(sql);
 			rs.next();
 			numproprio = rs.getInt("ID_PERSONNE");

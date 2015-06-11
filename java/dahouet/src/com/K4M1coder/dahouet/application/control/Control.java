@@ -3,14 +3,16 @@ package com.K4M1coder.dahouet.application.control;
 import java.util.ArrayList;
 
 import com.K4M1coder.dahouet.application.dao.OwnerDAO;
+import com.K4M1coder.dahouet.application.dao.PersDAO;
 import com.K4M1coder.dahouet.application.dao.ShipDAO;
 import com.K4M1coder.dahouet.application.methodes.model.Classe;
 import com.K4M1coder.dahouet.application.methodes.model.Club;
+import com.K4M1coder.dahouet.application.methodes.model.Personne;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 import com.K4M1coder.dahouet.application.methodes.model.Serie;
 import com.K4M1coder.dahouet.application.methodes.model.Voilier;
-import com.K4M1coder.dahouet.application.ui.UiValidated;
 import com.K4M1coder.dahouet.application.ui.UiOwnerNew;
+import com.K4M1coder.dahouet.application.ui.UiValidated;
 import com.K4M1coder.dahouet.application.ui.UiVoilier;
 
 public class Control {
@@ -19,7 +21,7 @@ public class Control {
 //	 public UiOwnerNew frameOwners;
 //	 public UiValidated frameValidation;
 	
-	public void initVoilierList() {
+	public void initUIVoilier() {
 		try {
 			UiVoilier frameShips = new UiVoilier();
 			frameShips.setVisible(true);
@@ -28,7 +30,7 @@ public class Control {
 		}
 	}
 
-	public void initOwnerNew() {
+	public void initUIOwner() {
 		try {
 			UiOwnerNew frameOwners = new UiOwnerNew();
 			frameOwners.setVisible(true);
@@ -37,7 +39,7 @@ public class Control {
 		}
 	}
 
-	public void initConfirm() {
+	public void initUIConfirm() {
 		try {
 			UiValidated frameValidation = new UiValidated();
 			frameValidation.setVisible(true);
@@ -50,6 +52,13 @@ public class Control {
 		ArrayList<Proprietaire> listOwner = new ArrayList<Proprietaire>();
 		listOwner = OwnerDAO.getProprio();
 		return listOwner;
+	}
+	
+	public ArrayList<Personne> persInit(){
+		
+		ArrayList<Personne> listPers = new ArrayList<Personne>();
+		listPers = PersDAO.getPers();
+		return listPers;
 	}
 	
 	public ArrayList<Voilier> voilierInit() {

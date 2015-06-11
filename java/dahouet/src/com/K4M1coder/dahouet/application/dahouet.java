@@ -39,7 +39,7 @@ public class dahouet {
 			public void run() {
 				try {
 					Control control = new Control();
-					control.initVoilierList();
+					control.initUIVoilier();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

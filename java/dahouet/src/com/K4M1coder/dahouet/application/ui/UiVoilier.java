@@ -52,7 +52,7 @@ public class UiVoilier extends JFrame {
 	private JButton btnEnreg;
 	private JButton btnAnnule;
 	private Control control = new Control();
-	private JSplitPane splitPane;
+	private JSplitPane splitPaneListVoiliers;
 	private JMenuBar menuBar;
 	private JMenu mnVoilier;
 	private int selectedVoilier;
@@ -132,15 +132,15 @@ public class UiVoilier extends JFrame {
 		JProgressBar progressBar = new JProgressBar();
 		panel.add(progressBar, BorderLayout.EAST);
 
-		splitPane = new JSplitPane();
-		splitPane.setVisible(true);
-		fenettrePrincipale.add(splitPane, BorderLayout.NORTH);
+		splitPaneListVoiliers = new JSplitPane();
+		splitPaneListVoiliers.setVisible(true);
+		fenettrePrincipale.add(splitPaneListVoiliers, BorderLayout.NORTH);
 
 		JLabel lblVoiliersListe = DefaultComponentFactory.getInstance().createLabel("Voiliers");
-		splitPane.setLeftComponent(lblVoiliersListe);
+		splitPaneListVoiliers.setLeftComponent(lblVoiliersListe);
 
 		comboBoxListeVoiliers = new JComboBox<Voilier>();
-		splitPane.setRightComponent(comboBoxListeVoiliers);
+		splitPaneListVoiliers.setRightComponent(comboBoxListeVoiliers);
 
 		comboBoxListeVoiliers.addItemListener(new ItemListener() {
 			@Override
@@ -154,36 +154,36 @@ public class UiVoilier extends JFrame {
 		refreshingListVoiliers = true;
 		refreshListeVoiliers();
 
-		JPanel panel_1 = new JPanel();
-		fenettrePrincipale.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(11, 3, 5, 5));
+		JPanel panelMain = new JPanel();
+		fenettrePrincipale.add(panelMain, BorderLayout.CENTER);
+		panelMain.setLayout(new GridLayout(11, 3, 5, 5));
 
 		JLabel label_6 = new JLabel("");
-		panel_1.add(label_6);
+		panelMain.add(label_6);
 
 		JLabel label_7 = new JLabel("");
-		panel_1.add(label_7);
+		panelMain.add(label_7);
 
 		JLabel label_8 = new JLabel("");
-		panel_1.add(label_8);
+		panelMain.add(label_8);
 
 		JLabel lblNomVoilier = new JLabel("Nom");
 		lblNomVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblNomVoilier);
+		panelMain.add(lblNomVoilier);
 
 		textField_NomVoilier = new JTextField();
-		panel_1.add(textField_NomVoilier);
+		panelMain.add(textField_NomVoilier);
 		textField_NomVoilier.setColumns(10);
 
 		JLabel label = new JLabel("");
-		panel_1.add(label);
+		panelMain.add(label);
 
 		JLabel lblProprietaireVoilier = new JLabel("Proprietaire");
-		panel_1.add(lblProprietaireVoilier);
+		panelMain.add(lblProprietaireVoilier);
 		lblProprietaireVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		comboBoxListeProprietaires = new JComboBox<Proprietaire>();
-		panel_1.add(comboBoxListeProprietaires);
+		panelMain.add(comboBoxListeProprietaires);
 		comboBoxListeProprietaires.removeAllItems();
 		ArrayList<Proprietaire> listeProprietaires = control.proprioInit();
 		for (Proprietaire proprio : listeProprietaires) {
@@ -193,32 +193,32 @@ public class UiVoilier extends JFrame {
 		;
 
 		btnNouvProp = new JButton("Nouveau");
-		panel_1.add(btnNouvProp);
+		panelMain.add(btnNouvProp);
 		btnNouvProp.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				control.initOwnerNew();
+				control.initUIOwner();
 
 			}
 		});
 
 		JLabel label_12 = new JLabel("");
-		panel_1.add(label_12);
+		panelMain.add(label_12);
 
 		JLabel label_24 = new JLabel("");
-		panel_1.add(label_24);
+		panelMain.add(label_24);
 
 		JLabel label_13 = new JLabel("");
-		panel_1.add(label_13);
+		panelMain.add(label_13);
 
 		JLabel lblSerieVoilier = new JLabel("Serie");
 		lblSerieVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblSerieVoilier);
+		panelMain.add(lblSerieVoilier);
 
 		comboBoxListeSeries = new JComboBox<Serie>();
-		panel_1.add(comboBoxListeSeries);
+		panelMain.add(comboBoxListeSeries);
 		comboBoxListeSeries.removeAllItems();
 		ArrayList<Serie> listeSeries = control.serieInit();
 		for (Serie serie : listeSeries) {
@@ -228,14 +228,14 @@ public class UiVoilier extends JFrame {
 
 
 		JLabel label2 = new JLabel("");
-		panel_1.add(label2);
+		panelMain.add(label2);
 
 		JLabel lblClasseVoilier = new JLabel("Classe");
 		lblClasseVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblClasseVoilier);
+		panelMain.add(lblClasseVoilier);
 
 		comboBoxListeClasses = new JComboBox<Classe>();
-		panel_1.add(comboBoxListeClasses);
+		panelMain.add(comboBoxListeClasses);
 		refreshListClasses();
 		
 		comboBoxListeSeries.addActionListener(new ActionListener() {
@@ -247,42 +247,42 @@ public class UiVoilier extends JFrame {
 		});
 
 		JLabel label3 = DefaultComponentFactory.getInstance().createLabel("");
-		panel_1.add(label3);
+		panelMain.add(label3);
 
 		JLabel lblCoeficientVoilier = new JLabel("Co\u00E9ficient");
 		lblCoeficientVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblCoeficientVoilier);
+		panelMain.add(lblCoeficientVoilier);
 
 		textField_CoefVoilier = new JTextField();
-		panel_1.add(textField_CoefVoilier);
+		panelMain.add(textField_CoefVoilier);
 		textField_CoefVoilier.setColumns(10);
 
 		JLabel label_19 = new JLabel("");
-		panel_1.add(label_19);
+		panelMain.add(label_19);
 
 		JLabel lblNumVoileVoilier = new JLabel("voile N°");
 		lblNumVoileVoilier.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblNumVoileVoilier);
+		panelMain.add(lblNumVoileVoilier);
 
 		textfield_numVoileVoilier = new JTextField();
 		textfield_numVoileVoilier.setEditable(false);
-		panel_1.add(textfield_numVoileVoilier);
+		panelMain.add(textfield_numVoileVoilier);
 		textfield_numVoileVoilier.setColumns(10);
 
 		JLabel label_23 = new JLabel("");
-		panel_1.add(label_23);
+		panelMain.add(label_23);
 
 		JLabel label_25 = new JLabel("");
-		panel_1.add(label_25);
+		panelMain.add(label_25);
 
 		JLabel label_2 = new JLabel("");
-		panel_1.add(label_2);
+		panelMain.add(label_2);
 
 		JLabel label_3 = new JLabel("");
-		panel_1.add(label_3);
+		panelMain.add(label_3);
 
 		btnNouveau = new JButton("Nouveau");
-		panel_1.add(btnNouveau);
+		panelMain.add(btnNouveau);
 		btnNouveau.addActionListener(new ActionListener() {
 
 			@Override
@@ -292,7 +292,7 @@ public class UiVoilier extends JFrame {
 		});
 
 		btnModifier = new JButton("Modifier");
-		panel_1.add(btnModifier);
+		panelMain.add(btnModifier);
 		btnModifier.addActionListener(new ActionListener() {
 
 			@Override
@@ -302,7 +302,7 @@ public class UiVoilier extends JFrame {
 		});
 
 		btnSupprimer = new JButton("Supprimer");
-		panel_1.add(btnSupprimer);
+		panelMain.add(btnSupprimer);
 		btnSupprimer.addActionListener(new ActionListener() {
 
 			@Override
@@ -312,7 +312,7 @@ public class UiVoilier extends JFrame {
 		});
 
 		btnCreer = new JButton("Créer");
-		panel_1.add(btnCreer);
+		panelMain.add(btnCreer);
 		btnCreer.addActionListener(new ActionListener() {
 
 			@Override
@@ -328,7 +328,7 @@ public class UiVoilier extends JFrame {
 		});
 
 		btnEnreg = new JButton("Enregistrer");
-		panel_1.add(btnEnreg);
+		panelMain.add(btnEnreg);
 		btnEnreg.addActionListener(new ActionListener() {
 
 			@Override
@@ -341,7 +341,7 @@ public class UiVoilier extends JFrame {
 		});
 
 		btnAnnule = new JButton("Annuler");
-		panel_1.add(btnAnnule);
+		panelMain.add(btnAnnule);
 		btnAnnule.addActionListener(new ActionListener() {
 
 			@Override
@@ -427,7 +427,7 @@ public class UiVoilier extends JFrame {
 	}
 
 	private void voilierNewSetUI() {
-		splitPane.setVisible(false);
+		splitPaneListVoiliers.setVisible(false);
 		textField_NomVoilier.setText("");
 		textField_NomVoilier.setEditable(true);
 		comboBoxListeProprietaires.setEnabled(true);
@@ -451,7 +451,7 @@ public class UiVoilier extends JFrame {
 	}
 
 	private void voilierModSetUI() {
-		splitPane.setVisible(true);
+		splitPaneListVoiliers.setVisible(true);
 		textField_NomVoilier.setEditable(true);
 		comboBoxListeVoiliers.setEnabled(false);
 		comboBoxListeProprietaires.setEnabled(true);
@@ -471,7 +471,7 @@ public class UiVoilier extends JFrame {
 	}
 
 	private void voiliersListSetUI() {
-		splitPane.setVisible(true);
+		splitPaneListVoiliers.setVisible(true);
 		comboBoxListeVoiliers.setEnabled(true);
 		comboBoxListeVoiliers.setSelectedIndex(selectedVoilier - 1);
 		textField_NomVoilier.setEditable(false);
