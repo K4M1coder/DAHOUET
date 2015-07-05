@@ -53,6 +53,7 @@ public class UiOwnerNew extends JFrame {
 	private Personne personne;
 	@SuppressWarnings("unused")
 	private int selectedPers;
+	private JTextField textFieldID;
 
 	/**
 	 * Create the main frame.
@@ -136,12 +137,13 @@ public class UiOwnerNew extends JFrame {
 		fenettrePrincipale.add(panelMain, BorderLayout.CENTER);
 		panelMain.setLayout(new GridLayout(11, 3, 5, 5));
 
-		JLabel label_32 = new JLabel("");
-		label_32.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelMain.add(label_32);
-
-		JLabel label_31 = new JLabel("");
-		panelMain.add(label_31);
+		JLabel lblID = new JLabel("id");
+		lblID.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelMain.add(lblID);
+		
+		textFieldID = new JTextField();
+		panelMain.add(textFieldID);
+		textFieldID.setColumns(10);
 
 		JLabel label_30 = new JLabel("");
 		panelMain.add(label_30);
@@ -241,7 +243,13 @@ public class UiOwnerNew extends JFrame {
 
 		JButton btnEnregistrer = new JButton("Enregistrer");
 		panelMain.add(btnEnregistrer);
-
+		btnEnregistrer.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ownerNewSetUI();
+			}			
+		});
 		JLabel label_4 = new JLabel("");
 		panelMain.add(label_4);
 
@@ -301,6 +309,7 @@ public class UiOwnerNew extends JFrame {
 
 		refreshingListPers = true;
 		refreshListPers();
+		persLoadUI();
 
 	}
 
@@ -318,6 +327,7 @@ public class UiOwnerNew extends JFrame {
 		personne = (Personne) comboBoxPersList.getSelectedItem();
 		selectedPers = personne.getIdPersonne();
 
+		textFieldID.setText(Integer.toString(personne.getIdPersonne()));
 		textFieldNom.setText(personne.getNom());
 		textFieldPrenom.setText(personne.getPrenom());
 		textFieldAdresse.setText(personne.getAddresse());
@@ -325,11 +335,14 @@ public class UiOwnerNew extends JFrame {
 		SimpleDateFormat dateN = new SimpleDateFormat("yyyy/MM/dd");
 		textFieldDateNaissance.setText(dateN.format(personne.getDateN()));
 		textFieldMail.setText(personne.getMail());
+		
+		
 	}
 
 	private void ownerNewSetUI() {
 
-		int idPersonne = 0, idPers = idPersonne;
+		int idPersonne = Integer.parseInt(textFieldID.getText()) ;
+		int idPers = idPersonne;
 		String nom = textFieldNom.getText();
 		String prenom = textFieldPrenom.getText();
 		String addresse = textFieldAdresse.getText();
@@ -341,11 +354,11 @@ public class UiOwnerNew extends JFrame {
 		int idClub = club.getIdClub();
 		int idProprio = 0;
 
-		@SuppressWarnings("unused")
 		Proprietaire proprio;
 		try {
 			proprio = new Proprietaire(idPersonne, nom, prenom, addresse, phone, dateN.parse(birthday), mail,
 					idProprio, idClub, idPers);
+			control.createProprio(proprio, club);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

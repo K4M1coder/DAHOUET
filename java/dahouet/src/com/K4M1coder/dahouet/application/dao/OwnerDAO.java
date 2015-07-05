@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -96,28 +98,42 @@ public class OwnerDAO {
 	public static void newProprio(Proprietaire proprio, Club club) {
 
 		Connection c = connectDAO.cConnect();
-		int numProprio = 0;
+		int numProprio = proprio.getIdPersonne();
 		PreparedStatement stm;
+		System.out.println(numProprio);
 		try {
-			stm = c.prepareStatement("insert into personne(NOM_PERSONNE,PRENOM_PERS,MAIL) VALUES(?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
-			stm.setString(1, proprio.getNom());
-			stm.setString(2, proprio.getPrenom());
-			stm.setString(3, proprio.getMail());
-			stm.executeUpdate();
+			if (numProprio == 0){
+				stm = c.prepareStatement("insert into personne(NOM,PRENOM,ADDRESSE,TELEPHONE,DATE_N,MAIL) VALUES(?,?,?,?,?,?)",
+						Statement.RETURN_GENERATED_KEYS);
+				stm.setString(1, proprio.getNom());
+				stm.setString(2, proprio.getPrenom());
+				stm.setString(3, proprio.getAddresse());
+				stm.setLong(4, proprio.getTelephone());
+				
+				Date date = proprio.getDateN();
+				String dateForMySql = "";
+				DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				dateForMySql = format.format(date);
+				    
+				stm.setString(5,  dateForMySql);
+				stm.setString(6, proprio.getMail());
+				
+				stm.executeUpdate();
+				
+				ResultSet rs = stm.getGeneratedKeys();
+				rs.next();
+				numProprio = rs.getInt(1);
+				stm.close();
+			}
 
-			ResultSet rs = stm.getGeneratedKeys();
-			rs.next();
-			numProprio = rs.getInt(1);
-			stm = c.prepareStatement("insert into proprietaire(NUM_PROPR,NUM_CLUB,ADRESSE_PROPR,TEL_PROPR) VALUES(?,?,?,?)");
-			stm.setInt(1, numProprio);
-			stm.setInt(2, club.getIdClub());
-			stm.setString(3, proprio.getAddresse());
-			stm.setLong(4, proprio.getTelephone());
+			
+			stm = c.prepareStatement("insert into proprietaire(ID_CLUB,ID_PERS) VALUES(?,?)");
+			stm.setInt(1, club.getIdClub());
+			stm.setInt(2, numProprio);
 			stm.executeUpdate();
 
 			stm.close();
-			stm.close();
+
 			c.close();
 
 		} catch (SQLException e) {

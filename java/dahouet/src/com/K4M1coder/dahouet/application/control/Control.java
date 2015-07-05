@@ -61,6 +61,17 @@ public class Control {
 		return listPers;
 	}
 	
+	public ArrayList<Personne> listPersNotOwner() {
+		
+		ArrayList<Personne> listPers = new ArrayList<Personne>();
+		ArrayList<Personne> listNotOwner = new ArrayList<Personne>();
+		listPers = persInit();
+		ArrayList<Proprietaire> listOwner = new ArrayList<Proprietaire>();
+		listOwner = proprioInit();
+		listNotOwner = listPers;
+		return listNotOwner;
+	} 
+	
 	public ArrayList<Voilier> voilierInit() {
 		ArrayList<Voilier> listVoiliers = new ArrayList<Voilier>();
 		listVoiliers = ShipDAO.getVoiliers();
