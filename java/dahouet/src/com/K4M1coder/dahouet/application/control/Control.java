@@ -15,15 +15,24 @@ import com.K4M1coder.dahouet.application.ui.UiOwner;
 import com.K4M1coder.dahouet.application.ui.UiValidated;
 import com.K4M1coder.dahouet.application.ui.UiVoilier;
 
-public class Control {
 
-//	 public UiVoilier frameShips;
-//	 public UiOwner frameOwners;
-//	 public UiValidated frameValidation;
+public class Control {
 	
+	private UiVoilier frameShips;
+	private UiOwner frameOwners;
+	private UiValidated frameValidation;
+	
+	public static String ctMail(String email) {
+		String result = "mail conforme";
+		if (email.matches("^[a-zA-Z0-9._-]{2,}+@[a-zA-Z0-9._-]{2,}\\.[a-z]{2,4}$"));
+		else
+		{ result="Adresse mail invalide"; }
+		return result;
+	}
+
 	public void initUIVoilier() {
 		try {
-			UiVoilier frameShips = new UiVoilier();
+			frameShips = new UiVoilier();
 			frameShips.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -32,7 +41,7 @@ public class Control {
 
 	public void initUIOwner() {
 		try {
-			UiOwner frameOwners = new UiOwner();
+			frameOwners = new UiOwner();
 			frameOwners.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,7 +50,7 @@ public class Control {
 
 	public void initUIConfirm() {
 		try {
-			UiValidated frameValidation = new UiValidated();
+			frameValidation = new UiValidated();
 			frameValidation.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  06/07/2015 11:51:20                      */
+/* Date de création :  24/05/2015 00:52:17                      */
 /*==============================================================*/
 
 
@@ -119,9 +119,9 @@ create table MEMBRE_DE_COMMISION
 /*==============================================================*/
 create table PARTICIPATION
 (
-   ID_PART              int not null,
-   ID_REGATE            int not null,
+   ID_PART              int not null auto_increment,
    ID_VOILIER           int not null,
+   ID_REGATE            int not null,
    H_DEP                time not null,
    STATUT_DEP           char(3) not null,
    H_ARRIV              time not null,
@@ -161,8 +161,9 @@ create table PERSONNE
 /*==============================================================*/
 create table PROPRIETAIRE
 (
-   ID_PROPR             int not null,
+   ID_PROPR             int not null auto_increment,
    ID_CLUB              int not null,
+   ID_PERS              int not null,
    primary key (ID_PROPR)
 );
 
@@ -225,7 +226,6 @@ create table VOILIER
    CLASSE               varchar(20) not null,
    COEFF                decimal(4,4) not null,
    NOM_VOILIER          varchar(20) not null,
-   NUM_VOILE            int not null,
    primary key (ID_VOILIER)
 );
 
@@ -244,10 +244,10 @@ alter table COMMISSION_DE_COURSE add constraint FK_PRESIDE foreign key (ID_PRESI
 alter table MARIN add constraint FK_EST_MARIN foreign key (ID_PERS)
       references PERSONNE (ID_PERS) on delete restrict on update restrict;
 
-alter table MEMBRE_DE_COMMISION add constraint FK_A_POUR_MEMBRE_DE_COMMISION foreign key (ID_COM)
+alter table MEMBRE_DE_COMMISION add constraint FK_FAIT_PARTIE2 foreign key (ID_COM)
       references COMMISSION_DE_COURSE (ID_COM) on delete restrict on update restrict;
 
-alter table MEMBRE_DE_COMMISION add constraint FK_EST_MEMBRE_DE_COMMISION foreign key (ID_COMMISSAIRE)
+alter table MEMBRE_DE_COMMISION add constraint FK_FAIT_PARTIE3 foreign key (ID_COMMISSAIRE)
       references COMMISSAIRES (ID_COMMISSAIRE) on delete restrict on update restrict;
 
 alter table PARTICIPATION add constraint FK_A_LE_STATUS_DE_DEPART foreign key (STATUT_DEP)
@@ -256,7 +256,7 @@ alter table PARTICIPATION add constraint FK_A_LE_STATUS_DE_DEPART foreign key (S
 alter table PARTICIPATION add constraint FK_A_LE_STATUS_D_ARRIVEE foreign key (STATUT_ARRIV)
       references STATUS_DES_ARRIVEES (STATUT_ARRIV) on delete restrict on update restrict;
 
-alter table PARTICIPATION add constraint FK_DISPUTE foreign key (ID_REGATE)
+alter table PARTICIPATION add constraint FK_CORRESPOND foreign key (ID_REGATE)
       references REGATE (ID_REGATE) on delete restrict on update restrict;
 
 alter table PARTICIPATION add constraint FK_EST_INSCRIT foreign key (ID_VOILIER)
@@ -265,16 +265,16 @@ alter table PARTICIPATION add constraint FK_EST_INSCRIT foreign key (ID_VOILIER)
 alter table PARTICIPATION add constraint FK_EST_SKIPPER foreign key (ID_SKIPER)
       references MARIN (ID_MARIN) on delete restrict on update restrict;
 
-alter table PARTICIPE add constraint FK_NAVIGUE foreign key (ID_MARIN)
-      references MARIN (ID_MARIN) on delete restrict on update restrict;
-
-alter table PARTICIPE add constraint FK_NAVIGUE_SUR foreign key (ID_PART)
+alter table PARTICIPE add constraint FK_PARTICIPE foreign key (ID_PART)
       references PARTICIPATION (ID_PART) on delete restrict on update restrict;
 
-alter table PROPRIETAIRE add constraint FK_A_POUR_MEMBRE foreign key (ID_CLUB)
+alter table PARTICIPE add constraint FK_PARTICIPE2 foreign key (ID_MARIN)
+      references MARIN (ID_MARIN) on delete restrict on update restrict;
+
+alter table PROPRIETAIRE add constraint FK_EST_MEMBRE foreign key (ID_CLUB)
       references CLUB (ID_CLUB) on delete restrict on update restrict;
 
-alter table PROPRIETAIRE add constraint FK_EST_PROPRIETAIRE foreign key (ID_PROPR)
+alter table PROPRIETAIRE add constraint FK_EST_PROPRIETAIRE foreign key (ID_PERS)
       references PERSONNE (ID_PERS) on delete restrict on update restrict;
 
 alter table REGATE add constraint FK_CONTIENS foreign key (ID_CHALL)
