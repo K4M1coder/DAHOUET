@@ -2,6 +2,10 @@ package test_JUnit;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -19,14 +23,21 @@ public class Test_Calculs {
 
 	@Test
 	public void calculPoints() {
+		
+		Licencie calcul = new Licencie(1, null, null, null, 0L, null, null,
+				0,0, 0L, 2015, 50);
+		
 
-		Licencie calcul = new Licencie(1, null, null, null, 0, 50, null, 2015);
 
 		assertEquals("200.0", Calcul.calculPoints(150, 2015, calcul));
 
-		Licencie calcul2 = new Licencie(1, null, null, null, 0, 200, null, 2015);
 
-		assertEquals("Problème Licence, MAJ impossible",
+		Licencie calcul2 = new Licencie(1, null, null, null, 0L, null, null,
+				0,0, 0L, 2015, 200);
+		
+
+
+		assertEquals("ProblÃ¨me Licence, MAJ impossible",
 				Calcul.calculPoints(380.5, 2014, calcul2));
 
 	}

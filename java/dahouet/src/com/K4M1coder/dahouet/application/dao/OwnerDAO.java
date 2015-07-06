@@ -95,27 +95,42 @@ public class OwnerDAO {
 
 	}
 
-	public static void newProprio(Proprietaire proprio, Club club) {
+	public static void newProprio(Proprietaire proprio, Club club, int createMode) {
 
 		Connection c = connectDAO.cConnect();
 		int numProprio = proprio.getIdPersonne();
+		Date date = proprio.getDateN();
+		String dateForMySql = "";
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		dateForMySql = dateFormat.format(date);				
 		PreparedStatement stm;
-		System.out.println(numProprio);
 		try {
-			if (numProprio == 0){
+
+			if (createMode == 2){
+				
+				stm = c.prepareStatement("update personne set NOM = ?,PRENOM = ?,ADDRESSE = ?,TELEPHONE = ?,DATE_N = ?,"
+						+ "MAIL = ? where ID_PERS = ?");
+				stm.setString(1, proprio.getNom());
+				stm.setString(2, proprio.getPrenom());
+				stm.setString(3, proprio.getAddresse());
+				stm.setLong(4, proprio.getTelephone());
+				stm.setString(5, dateForMySql);
+				stm.setString(6, proprio.getMail());
+				stm.setInt(7, numProprio);
+				
+				stm.executeUpdate();
+				
+				stm.close();
+				
+			} else if (createMode == 3) {
+				
 				stm = c.prepareStatement("insert into personne(NOM,PRENOM,ADDRESSE,TELEPHONE,DATE_N,MAIL) VALUES(?,?,?,?,?,?)",
 						Statement.RETURN_GENERATED_KEYS);
 				stm.setString(1, proprio.getNom());
 				stm.setString(2, proprio.getPrenom());
 				stm.setString(3, proprio.getAddresse());
 				stm.setLong(4, proprio.getTelephone());
-				
-				Date date = proprio.getDateN();
-				String dateForMySql = "";
-				DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-				dateForMySql = format.format(date);
-				    
-				stm.setString(5,  dateForMySql);
+				stm.setString(5, dateForMySql);
 				stm.setString(6, proprio.getMail());
 				
 				stm.executeUpdate();
@@ -123,7 +138,10 @@ public class OwnerDAO {
 				ResultSet rs = stm.getGeneratedKeys();
 				rs.next();
 				numProprio = rs.getInt(1);
+				
 				stm.close();
+				rs.close();
+				
 			}
 
 			

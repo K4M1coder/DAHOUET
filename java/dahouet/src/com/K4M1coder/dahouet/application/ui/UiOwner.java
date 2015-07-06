@@ -31,7 +31,7 @@ import com.K4M1coder.dahouet.application.methodes.model.Personne;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
-public class UiOwnerNew extends JFrame {
+public class UiOwner extends JFrame {
 
 	/**
 	 * 
@@ -41,6 +41,7 @@ public class UiOwnerNew extends JFrame {
 	private Control control = new Control();
 	private JMenuBar menuBar;
 	private JMenu mnProprio;
+	private JTextField textFieldID;
 	private JTextField textFieldNom;
 	private JTextField textFieldPrenom;
 	private JTextField textFieldAdresse;
@@ -51,14 +52,16 @@ public class UiOwnerNew extends JFrame {
 	private JComboBox<Personne> comboBoxPersList;
 	private Boolean refreshingListPers = false;
 	private Personne personne;
-	@SuppressWarnings("unused")
 	private int selectedPers;
-	private JTextField textFieldID;
+	private JButton btnModifier;
+	private JButton btnNouveau;
+	private int setUI = 1;
+
 
 	/**
 	 * Create the main frame.
 	 */
-	public UiOwnerNew() {
+	public UiOwner() {
 		setTitle("Nouveau Proprietaire");
 
 		// setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -90,7 +93,7 @@ public class UiOwnerNew extends JFrame {
 
 		mntmRecordOwner.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ownerNewSetUI();
+				ownerregisterUI();
 			}
 		});
 
@@ -100,7 +103,7 @@ public class UiOwnerNew extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ownerModSetUI();
+				cancelSetUI();
 
 			}
 		});
@@ -144,6 +147,7 @@ public class UiOwnerNew extends JFrame {
 		textFieldID = new JTextField();
 		panelMain.add(textFieldID);
 		textFieldID.setColumns(10);
+		textFieldID.setEditable(false);
 
 		JLabel label_30 = new JLabel("");
 		panelMain.add(label_30);
@@ -247,7 +251,7 @@ public class UiOwnerNew extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ownerNewSetUI();
+				ownerregisterUI();
 			}			
 		});
 		JLabel label_4 = new JLabel("");
@@ -259,7 +263,11 @@ public class UiOwnerNew extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				closeOwnerUI();
+				if (setUI == 1 ){
+					closeOwnerUI();
+				} else {
+					cancelSetUI();
+				}
 
 			}
 		});
@@ -282,11 +290,30 @@ public class UiOwnerNew extends JFrame {
 		splitPanePersEdit.setResizeWeight(.5d);
 		splitPanePersonnes.setRightComponent(splitPanePersEdit);
 
-		JButton btnModifier = new JButton("Modifier");
+		btnModifier = new JButton("Modifier");
 		splitPanePersEdit.setLeftComponent(btnModifier);
+		btnModifier.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				modSetUI();
+				setUI = 2;
+			}
+		});
 
-		JButton btnNouveau = new JButton("Nouveau");
+		btnNouveau = new JButton("Nouveau");
 		splitPanePersEdit.setRightComponent(btnNouveau);
+		btnNouveau.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				newSetUI();
+				setUI = 3;
+			}
+		});
+		
 
 		JSplitPane splitPanePersList = new JSplitPane();
 		splitPanePersonnes.setLeftComponent(splitPanePersList);
@@ -310,12 +337,13 @@ public class UiOwnerNew extends JFrame {
 		refreshingListPers = true;
 		refreshListPers();
 		persLoadUI();
+		registerSetUI();
 
 	}
 
 	private void refreshListPers() {
 		comboBoxPersList.removeAllItems();
-		ArrayList<Personne> listPers = control.persInit();
+		ArrayList<Personne> listPers = control.listPersNotOwner();
 
 		for (Personne pers : listPers) {
 			comboBoxPersList.addItem(pers);
@@ -339,7 +367,7 @@ public class UiOwnerNew extends JFrame {
 		
 	}
 
-	private void ownerNewSetUI() {
+	private void ownerregisterUI() {
 
 		int idPersonne = Integer.parseInt(textFieldID.getText()) ;
 		int idPers = idPersonne;
@@ -358,7 +386,7 @@ public class UiOwnerNew extends JFrame {
 		try {
 			proprio = new Proprietaire(idPersonne, nom, prenom, addresse, phone, dateN.parse(birthday), mail,
 					idProprio, idClub, idPers);
-			control.createProprio(proprio, club);
+			control.createProprio(proprio, club, setUI);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -368,12 +396,66 @@ public class UiOwnerNew extends JFrame {
 		dispose();
 	}
 
-	private void ownerModSetUI() {
+	private void cancelSetUI() {
+		
+		registerSetUI();
+		if (setUI == 3 ){
+			refreshingListPers = true;
+			refreshListPers();
+		}
+		setUI = 1;					
+		persLoadUI();
 
 	}
 
 	private void closeOwnerUI() {
 		control.initUIVoilier();
 		dispose();
+	}
+	
+	private void registerSetUI(){
+		textFieldID.setVisible(true);
+		textFieldNom.setEditable(false);
+		textFieldPrenom.setEditable(false);
+		textFieldAdresse.setEditable(false);
+		textFieldPhone.setEditable(false);
+		textFieldDateNaissance.setEditable(false);
+		textFieldMail.setEditable(false);
+		btnModifier.setEnabled(true);
+		btnNouveau.setEnabled(true);
+		comboBoxPersList.setEnabled(true);
+	}
+	
+	private void modSetUI(){
+		textFieldID.setVisible(true);
+		textFieldNom.setEditable(true);
+		textFieldPrenom.setEditable(true);
+		textFieldAdresse.setEditable(true);
+		textFieldPhone.setEditable(true);
+		textFieldDateNaissance.setEditable(true);
+		textFieldMail.setEditable(true);
+		btnModifier.setEnabled(false);
+		btnNouveau.setEnabled(false);
+		comboBoxPersList.setEnabled(false);
+	}
+	
+	private void newSetUI(){
+		textFieldID.setVisible(false);
+		textFieldID.setText("0");
+		textFieldNom.setEditable(true);
+		textFieldNom.setText("");
+		textFieldPrenom.setEditable(true);
+		textFieldPrenom.setText("");
+		textFieldAdresse.setEditable(true);
+		textFieldAdresse.setText("");
+		textFieldPhone.setEditable(true);
+		textFieldPhone.setText("");
+		textFieldDateNaissance.setEditable(true);
+		textFieldDateNaissance.setText("yyyy/MM/dd");
+		textFieldMail.setEditable(true);
+		textFieldMail.setText("compte@mail.com");
+		btnModifier.setEnabled(false);
+		btnNouveau.setEnabled(false);
+		comboBoxPersList.setEnabled(false);
 	}
 }

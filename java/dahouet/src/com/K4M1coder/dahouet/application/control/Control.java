@@ -11,14 +11,14 @@ import com.K4M1coder.dahouet.application.methodes.model.Personne;
 import com.K4M1coder.dahouet.application.methodes.model.Proprietaire;
 import com.K4M1coder.dahouet.application.methodes.model.Serie;
 import com.K4M1coder.dahouet.application.methodes.model.Voilier;
-import com.K4M1coder.dahouet.application.ui.UiOwnerNew;
+import com.K4M1coder.dahouet.application.ui.UiOwner;
 import com.K4M1coder.dahouet.application.ui.UiValidated;
 import com.K4M1coder.dahouet.application.ui.UiVoilier;
 
 public class Control {
 
 //	 public UiVoilier frameShips;
-//	 public UiOwnerNew frameOwners;
+//	 public UiOwner frameOwners;
 //	 public UiValidated frameValidation;
 	
 	public void initUIVoilier() {
@@ -32,7 +32,7 @@ public class Control {
 
 	public void initUIOwner() {
 		try {
-			UiOwnerNew frameOwners = new UiOwnerNew();
+			UiOwner frameOwners = new UiOwner();
 			frameOwners.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,13 +63,21 @@ public class Control {
 	
 	public ArrayList<Personne> listPersNotOwner() {
 		
-		ArrayList<Personne> listPers = new ArrayList<Personne>();
-		ArrayList<Personne> listNotOwner = new ArrayList<Personne>();
-		listPers = persInit();
-		ArrayList<Proprietaire> listOwner = new ArrayList<Proprietaire>();
-		listOwner = proprioInit();
-		listNotOwner = listPers;
-		return listNotOwner;
+		ArrayList<Personne> listPers = persInit();
+		ArrayList<Proprietaire> listOwner = proprioInit();
+		
+		for (int j=listPers.size()-1;j>=0;j=j-1){
+			Personne pers = listPers.get(j);
+					for (int i=listOwner.size()-1;i>=0;i=i-1){
+						Proprietaire owner = listOwner.get(i);
+						if (pers.getIdPersonne()==owner.getIdPersonne()){
+							listPers.remove(pers);
+							i=-1;
+						}
+			}
+		}
+
+		return listPers;
 	} 
 	
 	public ArrayList<Voilier> voilierInit() {
@@ -97,9 +105,11 @@ public class Control {
 		return listClub;
 	}
 
-	public void createProprio(Proprietaire proprio, Club club) {
+	public void createProprio(Proprietaire proprio, Club club, int createMode) {
 
-		OwnerDAO.newProprio(proprio, club);
+		
+		OwnerDAO.newProprio(proprio, club, createMode);
+
 	}
 
 	public void createVoilier(Voilier voilier, Proprietaire proprio) {
